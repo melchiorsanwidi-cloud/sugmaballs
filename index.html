@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Through the Drafts — A Writing Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1814;
+    --ink-light: #4a4540;
+    --ink-muted: #8a8278;
+    --page: #faf8f3;
+    --cream: #f2ede4;
+    --rule: #ddd7cc;
+    --accent: #b85c38;
+    --accent-soft: #f0e0d8;
+    --gold: #c9a84c;
+    --nav-h: 64px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--page);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: var(--page);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: 0.4rem 1rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-links li a:hover,
+  .nav-links li a.active {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ─── PAGE WRAPPER ─── */
+  main {
+    padding-top: var(--nav-h);
+    min-height: 100vh;
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ─── HOME ─── */
+  .hero {
+    min-height: calc(100vh - var(--nav-h));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .hero-text {
+    padding: 5rem 3rem 5rem 4rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--ink-light);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: var(--accent);
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: #9e4d2c; transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: transparent;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1.5px solid var(--accent);
+    cursor: pointer;
+    margin-left: 1rem;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover { background: var(--accent-soft); }
+
+  .hero-visual {
+    background: var(--cream);
+    height: 100%;
+    min-height: calc(100vh - var(--nav-h));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+  }
+
+  .hero-visual::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 240px; height: 240px;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+  }
+
+  .quote-block {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .quote-block .big-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    line-height: 0.8;
+    color: var(--accent);
+    opacity: 0.15;
+    font-style: italic;
+    margin-bottom: -2rem;
+  }
+
+  .quote-block p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.6;
+    max-width: 340px;
+  }
+
+  .quote-block cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-style: normal;
+  }
+
+  /* ─── ABOUT PAGE ─── */
+  .page-header {
+    padding: 4rem 4rem 2rem;
+    border-bottom: 1px solid var(--rule);
+    max-width: 900px;
+  }
+
+  .page-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 3rem 4rem;
+    max-width: 1100px;
+  }
+
+  .prose p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--ink-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .prose p:last-child { margin-bottom: 0; }
+
+  .about-facts {
+    padding-top: 1rem;
+  }
+
+  .fact-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .fact-item:last-child { border-bottom: none; }
+
+  .fact-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 48px;
+    opacity: 0.6;
+  }
+
+  .fact-text strong {
+    display: block;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .fact-text span {
+    font-size: 0.95rem;
+    color: var(--ink-light);
+  }
+
+  /* ─── ASSIGNMENTS ─── */
+  .assignments-grid {
+    padding: 3rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+  }
+
+  .assignment-card {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 2rem;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .assignment-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .assignment-card:hover {
+    border-color: var(--accent);
+    box-shadow: 4px 4px 0 var(--accent-soft);
+    transform: translate(-2px, -2px);
+  }
+
+  .assignment-card:hover::before { opacity: 1; }
+
+  .card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--rule);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--ink-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    background: var(--cream);
+    color: var(--ink-muted);
+    border: 1px solid var(--rule);
+  }
+
+  .tag.accent {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: #e8c4b8;
+  }
+
+  /* ─── ASSIGNMENT DETAIL VIEW ─── */
+  #assignment-detail { display: none; }
+  #assignment-detail.active { display: block; }
+
+  .detail-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    cursor: pointer;
+    padding: 2rem 4rem 0;
+    transition: color 0.2s;
+  }
+
+  .detail-back:hover { color: var(--accent); }
+
+  .detail-header {
+    padding: 2rem 4rem 2.5rem;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+    max-width: 1100px;
+  }
+
+  .detail-stages {
+    padding: 3rem 4rem;
+    max-width: 900px;
+  }
+
+  .stage-block {
+    margin-bottom: 3rem;
+    padding-left: 2rem;
+    border-left: 2px solid var(--rule);
+    transition: border-color 0.2s;
+  }
+
+  .stage-block:hover { border-color: var(--accent); }
+
+  .stage-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .stage-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+
+  .stage-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--ink-light);
+  }
+
+  .file-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid currentColor;
+    text-decoration: none;
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+
+  .file-link:hover { opacity: 0.7; }
+
+  /* ─── REFLECTION ─── */
+  .reflection-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    min-height: calc(100vh - var(--nav-h) - 140px);
+  }
+
+  .reflection-sidebar {
+    border-right: 1px solid var(--rule);
+    padding: 3rem 2rem;
+    position: sticky;
+    top: var(--nav-h);
+    height: fit-content;
+  }
+
+  .reflection-sidebar h3 {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .sidebar-link {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .sidebar-link:hover { color: var(--accent); }
+
+  .reflection-body {
+    padding: 3rem 4rem;
+    max-width: 780px;
+  }
+
+  .reflection-section {
+    margin-bottom: 4rem;
+  }
+
+  .reflection-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .reflection-section p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--ink-light);
+    margin-bottom: 1.2rem;
+  }
+
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: var(--cream);
+  }
+
+  blockquote p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem !important;
+    color: var(--ink) !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .hero-text { padding: 3rem 1.5rem; }
+    .two-col, .reflection-layout { grid-template-columns: 1fr; }
+    .page-header, .assignments-grid, .detail-stages, .detail-back, .detail-header, .reflection-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+    nav { padding: 0 1rem; }
+    .nav-links li a { padding: 0.4rem 0.5rem; font-size: 0.72rem; }
+  }
+
+  /* ─── FADE TRANSITION ─── */
+  .page { opacity: 0; transition: opacity 0.25s; }
+  .page.active { opacity: 1; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo" onclick="navigate('home')">Through the Drafts</span>
+  <ul class="nav-links">
+    <li><a onclick="navigate('home')" id="nav-home">Home</a></li>
+    <li><a onclick="navigate('about')" id="nav-about">About</a></li>
+    <li><a onclick="navigate('assignments')" id="nav-assignments">Assignments</a></li>
+    <li><a onclick="navigate('reflection')" id="nav-reflection">Reflection</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- ═══ HOME PAGE ═══ -->
+  <div class="page active" id="page-home">
+    <section class="hero">
+      <div class="hero-text">
+        <p class="hero-eyebrow">A Writing Portfolio</p>
+        <h1 class="hero-title">Words <em>written,</em><br>rewritten,<br>and understood.</h1>
+        <p class="hero-sub">
+          Welcome. This portfolio collects the writing I've done this semester — the first drafts, the revisions, and the reflections in between. Each piece here marks a moment of figuring something out, about writing, and about myself.
+        </p>
+        <button class="btn-primary" onclick="navigate('assignments')">View Assignments</button>
+        <button class="btn-ghost" onclick="navigate('about')">About This Site</button>
+      </div>
+      <div class="hero-visual">
+        <div class="quote-block">
+          <div class="big-quote">"</div>
+          <p>A writer only begins a book. A reader finishes it.</p>
+          <cite>— Samuel Johnson</cite>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ ABOUT PAGE ═══ -->
+  <div class="page" id="page-about">
+    <div class="page-header">
+      <p class="page-label">About This Site</p>
+      <h1 class="page-title">Introduction &amp; Organization</h1>
+    </div>
+    <div class="two-col">
+      <div class="prose">
+        <p>
+          <strong style="color:var(--ink);font-weight:500;">Hi — I'm [Your Name].</strong> I'm a student in [Course Name] this semester. Writing has always felt like a negotiation between what I mean and what I actually say, and this portfolio is the record of that negotiation played out across several months.
+        </p>
+        <p>
+          This website is organized into four sections. The <strong style="color:var(--ink);font-weight:500;">Home</strong> page is your entry point and mood-setter. <strong style="color:var(--ink);font-weight:500;">About</strong> (where you are now) introduces me and explains how this site is laid out. <strong style="color:var(--ink);font-weight:500;">Assignments</strong> holds every piece of writing from this semester, each with its own card showing the stages from brainstorm to final draft. <strong style="color:var(--ink);font-weight:500;">Reflection</strong> is the honest accounting — what the semester meant, what I learned about myself, not just my writing.
+        </p>
+        <p>
+          I chose this layout because writing is not a single event but a process with layers. The sidebar navigation, present on every page, mirrors that idea: you can step into any part of this portfolio at any time, the way you might reread a draft from the middle rather than the beginning.
+        </p>
+        <p>
+          The title — <em style="font-family:'Playfair Display',serif;">Through the Drafts</em> — was chosen deliberately. Every piece here went through multiple versions. The title acknowledges that the drafts themselves are the story, not just the final polished product.
+        </p>
+      </div>
+      <div class="about-facts">
+        <div class="fact-item">
+          <div class="fact-num">01</div>
+          <div class="fact-text">
+            <strong>Course</strong>
+            <span>English Composition / [Your Course Title]</span>
+          </div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">02</div>
+          <div class="fact-text">
+            <strong>Semester</strong>
+            <span>[Fall/Spring] [Year]</span>
+          </div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">03</div>
+          <div class="fact-text">
+            <strong>Assignments Included</strong>
+            <span>4 major projects, each with brainstorm, draft, and final stages</span>
+          </div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">04</div>
+          <div class="fact-text">
+            <strong>Layout Principle</strong>
+            <span>Persistent navigation so no page is ever more than one click away</span>
+          </div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">05</div>
+          <div class="fact-text">
+            <strong>Tested On</strong>
+            <span>Chrome, Safari, Firefox — desktop &amp; mobile</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ASSIGNMENTS LIST PAGE ═══ -->
+  <div class="page" id="page-assignments">
+    <div class="page-header">
+      <p class="page-label">All Work</p>
+      <h1 class="page-title">Assignments</h1>
+    </div>
+    <div class="assignments-grid">
+
+      <div class="assignment-card" onclick="openAssignment(1)">
+        <div class="card-num">01</div>
+        <h2 class="card-title">Personal Narrative Essay</h2>
+        <p class="card-desc">
+          This assignment asked me to narrate a personal experience and examine what it revealed about my identity. I worked through three drafts — an initial freewrite, a structured revision, and a final polish — learning that the story I thought I was telling was actually about something deeper than I first realized.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Narrative</span>
+          <span class="tag">3 Drafts</span>
+          <span class="tag accent">Click to View</span>
+        </div>
+      </div>
+
+      <div class="assignment-card" onclick="openAssignment(2)">
+        <div class="card-num">02</div>
+        <h2 class="card-title">Rhetorical Analysis</h2>
+        <p class="card-desc">
+          For this assignment, I chose a piece of public writing — [a speech, article, or advertisement] — and analyzed how its author used ethos, pathos, and logos to persuade an audience. Drafting this essay taught me to read more suspiciously and to recognize how structure itself is an argument.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Analysis</span>
+          <span class="tag">2 Drafts</span>
+          <span class="tag accent">Click to View</span>
+        </div>
+      </div>
+
+      <div class="assignment-card" onclick="openAssignment(3)">
+        <div class="card-num">03</div>
+        <h2 class="card-title">Research Argument Paper</h2>
+        <p class="card-desc">
+          This was the semester's largest project: a research-based argument on [your topic]. I went through a proposal, annotated bibliography, rough draft, peer review, and final revision. The process showed me how an argument is built from the outside in — you find the evidence first, then find out what you actually believe.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Research</span>
+          <span class="tag">5 Stages</span>
+          <span class="tag accent">Click to View</span>
+        </div>
+      </div>
+
+      <div class="assignment-card" onclick="openAssignment(4)">
+        <div class="card-num">04</div>
+        <h2 class="card-title">Reflective Cover Letter</h2>
+        <p class="card-desc">
+          Written at the semester's end, this cover letter frames the work in this portfolio and explains my growth as a writer. It is addressed to a future reader who has never met me and is my attempt to synthesize everything the semester taught me into one honest, clear document.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Reflection</span>
+          <span class="tag">1 Draft</span>
+          <span class="tag accent">Click to View</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ ASSIGNMENT DETAIL ═══ -->
+  <div class="page" id="page-assignment-detail">
+    <span class="detail-back" onclick="navigate('assignments')">&#8592; Back to All Assignments</span>
+    <div class="detail-header" id="detail-header-content"></div>
+    <div class="detail-stages" id="detail-stages-content"></div>
+  </div>
+
+  <!-- ═══ REFLECTION PAGE ═══ -->
+  <div class="page" id="page-reflection">
+    <div class="page-header">
+      <p class="page-label">Overview Reflection</p>
+      <h1 class="page-title">What I Learned About Myself</h1>
+    </div>
+    <div class="reflection-layout">
+      <aside class="reflection-sidebar">
+        <h3>Sections</h3>
+        <span class="sidebar-link" onclick="scrollToSection('ref-start')">Where I Started</span>
+        <span class="sidebar-link" onclick="scrollToSection('ref-process')">The Writing Process</span>
+        <span class="sidebar-link" onclick="scrollToSection('ref-self')">What I Learned About Myself</span>
+        <span class="sidebar-link" onclick="scrollToSection('ref-forward')">Going Forward</span>
+      </aside>
+      <div class="reflection-body">
+
+        <div class="reflection-section" id="ref-start">
+          <h2>Where I Started</h2>
+          <p>
+            [Replace this with your own text.] At the beginning of this semester, I thought writing was mostly about grammar and vocabulary — that if you used the right words in the right order, a good essay would follow. I was wrong, and it took me several failed drafts to understand why.
+          </p>
+          <p>
+            My first assignment was humbling. I had something to say, but I couldn't find the shape of it on the page. I rewrote the opening paragraph six times and still wasn't satisfied. That frustration was, I think, the first honest thing to happen to me in this class.
+          </p>
+        </div>
+
+        <div class="reflection-section" id="ref-process">
+          <h2>The Writing Process</h2>
+          <p>
+            [Replace this with your own text.] What I discovered over the course of the semester is that drafting is not a failure state — it is the state. Writing is not the transcription of thoughts you already have; it is the process of having them. By the time I was working on my research paper, I had started to trust the mess of an early draft in a way I never had before.
+          </p>
+          <blockquote>
+            <p>The first draft is just you telling yourself the story.</p>
+          </blockquote>
+          <p>
+            Peer review was uncomfortable and useful in equal measure. Hearing that a paragraph I was proud of was confusing to a reader forced me to separate my intention from my effect — which is, I now think, the central skill of writing.
+          </p>
+        </div>
+
+        <div class="reflection-section" id="ref-self">
+          <h2>What I Learned About Myself</h2>
+          <p>
+            [Replace this with your own text — this is the required overview reflection.] I learned that I am someone who avoids conflict in my writing the same way I avoid it in conversation. My early drafts tend to soften claims, hedge arguments, and give every side equal time even when I don't actually believe every side deserves it. Recognizing this pattern was uncomfortable. It made me see my writing as a mirror — not just of my thoughts, but of my habits and fears.
+          </p>
+          <p>
+            I also learned that I am more patient than I gave myself credit for. The research paper required staying with a topic for weeks without being sure where I was going. I expected to hate that uncertainty. Instead, I found that it is where the most interesting thinking happens.
+          </p>
+          <p>
+            Most importantly, I learned that I write to understand — not to report. When I finished an assignment and felt satisfied, it was always because I had figured something out that I didn't know when I started. That is the kind of writer I want to keep being.
+          </p>
+        </div>
+
+        <div class="reflection-section" id="ref-forward">
+          <h2>Going Forward</h2>
+          <p>
+            [Replace this with your own text.] I leave this semester with a clearer sense of what I need to work on: directness, mostly. I need to trust the reader more and trust myself more. The writing I'm proudest of in this portfolio is the writing where I stopped hedging and just said the thing. I want to do more of that.
+          </p>
+          <p>
+            This portfolio is not a finished product. It is evidence of a process. I hope whoever reads it can see the thinking in the drafts as clearly as in the finals.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const assignments = {
+  1: {
+    title: "Personal Narrative Essay",
+    label: "Assignment 01",
+    description: "A personal narrative examining identity through lived experience. Three drafts, each revealing a deeper layer of what the story was actually about.",
+    stages: [
+      {
+        label: "Stage 1 — Brainstorm / Freewrite",
+        title: "Finding the Story",
+        desc: "I began with a 20-minute freewrite about [the experience you chose], not worrying about structure or audience. This stage was messy and honest — the goal was to excavate memories, not organize them. I found that the moment I kept returning to, without planning to, was the one I ended up writing about.",
+        file: "#"
+      },
+      {
+        label: "Stage 2 — Rough Draft",
+        title: "First Full Draft",
+        desc: "The rough draft imposed a beginning, middle, and end on the freewrite material. At this stage I made a key structural decision: to start in the middle of the action rather than with background context. The draft was overlong and occasionally unfocused, but the core idea — [your theme] — was beginning to emerge.",
+        file: "#"
+      },
+      {
+        label: "Stage 3 — Peer Review Notes",
+        title: "Feedback Received",
+        desc: "Peer reviewers flagged two issues: the ending felt rushed, and one section in the middle repeated the same idea in three different ways. I kept the repetition in the final draft, but shortened and sharpened it — the reviewers were right that it needed to earn its length.",
+        file: "#"
+      },
+      {
+        label: "Stage 4 — Final Draft",
+        title: "Revised and Submitted",
+        desc: "The final draft is approximately [X] words and focuses tightly on [the core moment or theme]. The biggest revision from draft two was cutting the final two paragraphs entirely and ending on an image rather than an explanation. This was the hardest revision to make and, I think, the most important one.",
+        file: "#"
+      }
+    ]
+  },
+  2: {
+    title: "Rhetorical Analysis",
+    label: "Assignment 02",
+    description: "An analysis of a persuasive text — examining how the author's choices of ethos, pathos, and logos work together to construct an argument.",
+    stages: [
+      {
+        label: "Stage 1 — Text Selection &amp; Annotation",
+        title: "Choosing and Marking the Text",
+        desc: "I chose [your text — speech, article, ad] because [your reason]. Before writing anything, I read it three times with different colored pens: once for structure, once for emotional appeals, once for logical claims. The annotations from this stage became the outline for the essay.",
+        file: "#"
+      },
+      {
+        label: "Stage 2 — Rough Draft",
+        title: "First Analysis Draft",
+        desc: "My first draft made the mistake of summarizing the text rather than analyzing it. I described what the author did without explaining why those choices were effective. My instructor's comment on this draft — 'So what?' — is the most useful feedback I got all semester, because it taught me to always answer the question of significance.",
+        file: "#"
+      },
+      {
+        label: "Stage 3 — Final Draft",
+        title: "Revised and Submitted",
+        desc: "The final draft reorganizes the analysis around three claims about the text's rhetorical strategy rather than around a chronological summary. Each body paragraph now follows the structure: identify the technique, provide evidence, explain the effect on a specific audience. This structure was cleaner and more persuasive than the original.",
+        file: "#"
+      }
+    ]
+  },
+  3: {
+    title: "Research Argument Paper",
+    label: "Assignment 03",
+    description: "A full research paper arguing a position on [your topic]. Five stages from proposal through final revision — the most complex writing process of the semester.",
+    stages: [
+      {
+        label: "Stage 1 — Proposal",
+        title: "Topic and Argument Proposal",
+        desc: "My proposal identified [your topic] as my research area and offered a preliminary claim: [your early thesis statement]. The proposal was also where I had to acknowledge counterarguments I would need to address — an exercise that immediately complicated my thinking in productive ways.",
+        file: "#"
+      },
+      {
+        label: "Stage 2 — Annotated Bibliography",
+        title: "Sources and Summaries",
+        desc: "I compiled [X] sources — a mix of peer-reviewed articles, books, and credible journalism. Writing the annotations forced me to engage with each source individually before trying to use it in an argument. I discovered that two of my sources actually contradicted my thesis, which eventually made the argument stronger.",
+        file: "#"
+      },
+      {
+        label: "Stage 3 — Rough Draft",
+        title: "First Full Draft (Research)",
+        desc: "The rough draft was [X] pages and used [X] sources. At this stage the argument was present but unevenly supported — some paragraphs leaned heavily on one source while others relied too much on my own assertion without evidence. The introduction and conclusion were placeholder versions that I knew I'd need to replace.",
+        file: "#"
+      },
+      {
+        label: "Stage 4 — Peer Review",
+        title: "Feedback and Response",
+        desc: "Peer review was conducted in a structured workshop. I received written comments from two classmates. The most useful comment identified a logical gap in my argument: I was assuming the reader agreed with a premise I had never actually defended. I added a full paragraph addressing this in the revision.",
+        file: "#"
+      },
+      {
+        label: "Stage 5 — Final Draft",
+        title: "Revised and Submitted",
+        desc: "The final paper is [X] pages and argues [your final thesis]. The most significant structural revision was moving the section on counterarguments earlier in the paper — before my main argument rather than after it. This change made the paper feel more intellectually honest and less defensive.",
+        file: "#"
+      }
+    ]
+  },
+  4: {
+    title: "Reflective Cover Letter",
+    label: "Assignment 04",
+    description: "A cover letter for this portfolio, addressed to a future reader. Written at the semester's end as a synthesis of growth and learning.",
+    stages: [
+      {
+        label: "Stage 1 — Outline and Notes",
+        title: "Planning the Letter",
+        desc: "Before drafting, I listed every significant moment from the semester — drafts I was proud of, feedback that surprised me, revisions I resisted. The outline was less a structural plan and more a curated list of moments worth mentioning. I knew the letter needed to be honest rather than ceremonial.",
+        file: "#"
+      },
+      {
+        label: "Stage 2 — Draft and Final",
+        title: "Written and Revised",
+        desc: "The cover letter went through one full draft and one revision. The main revision was tonal — the first draft was too formal and congratulatory, as if I was writing to an admissions committee rather than to a reader of my writing. The final version is more direct and more willing to admit what I still need to work on.",
+        file: "#"
+      }
+    ]
+  }
+};
+
+function navigate(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+
+  const target = document.getElementById('page-' + page);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  const navLink = document.getElementById('nav-' + page);
+  if (navLink) navLink.classList.add('active');
+
+  if (page !== 'assignment-detail') {
+    document.getElementById('nav-assignments').classList.remove('active');
+    if (page === 'assignments') document.getElementById('nav-assignments').classList.add('active');
+  }
+
+  window.location.hash = page;
+}
+
+function openAssignment(id) {
+  const a = assignments[id];
+  if (!a) return;
+
+  document.getElementById('detail-header-content').innerHTML = `
+    <div>
+      <p class="page-label">${a.label}</p>
+      <h1 class="page-title">${a.title}</h1>
+      <p style="margin-top:1rem;font-size:0.95rem;line-height:1.7;color:var(--ink-light);max-width:600px;">${a.description}</p>
+    </div>
+    <div style="text-align:right;">
+      <span style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">${a.stages.length} Stage${a.stages.length > 1 ? 's' : ''}</span>
+    </div>
+  `;
+
+  document.getElementById('detail-stages-content').innerHTML = a.stages.map(s => `
+    <div class="stage-block">
+      <p class="stage-label">${s.label}</p>
+      <h3 class="stage-title">${s.title}</h3>
+      <p class="stage-desc">${s.desc}</p>
+      <a class="file-link" href="${s.file}">&#128196; Upload / Link Your File Here &rarr;</a>
+    </div>
+  `).join('');
+
+  navigate('assignment-detail');
+  document.getElementById('nav-assignments').classList.add('active');
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Handle hash navigation on load
+window.addEventListener('load', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById('page-' + hash)) {
+    navigate(hash);
+  } else {
+    navigate('home');
+  }
+});
+
+window.addEventListener('hashchange', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById('page-' + hash) && hash !== 'assignment-detail') {
+    navigate(hash);
+  }
+});
+</script>
+</body>
+</html>
