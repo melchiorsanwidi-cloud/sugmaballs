@@ -6,30 +6,31 @@
 <title>Growing As a Writer — ENGL 101 Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Karla:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --ink: #1a1814;
-    --ink-light: #3d3730;
-    --ink-muted: #7a7268;
-    --page: #f5f1ea;
-    --cream: #ede7db;
-    --rule: #d8d0c2;
+    --ink: #0e0c0a;
+    --ink-light: #2a2520;
+    --ink-muted: #6e665c;
+    --page: #f2ede4;
+    --cream: #e8e0d0;
+    --rule: #ccc4b4;
     --accent: #2c4a3e;
     --accent-soft: #d6e4df;
     --accent-dark: #1a2f27;
-    --gold: #8b6914;
-    --gold-light: #d4b96a;
-    --sidebar-w: 280px;
+    --gold: #b8922a;
+    --gold-light: #d4a84a;
+    --gold-pale: #ede0c0;
+    --sidebar-w: 270px;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--page);
+    font-family: 'Karla', sans-serif;
+    background: var(--ink);
     color: var(--ink);
     min-height: 100vh;
     display: flex;
@@ -38,702 +39,688 @@
   /* ═══════ SIDEBAR ═══════ */
   .sidebar {
     position: fixed;
-    left: 0;
-    top: 0;
+    left: 0; top: 0;
     width: var(--sidebar-w);
     height: 100vh;
-    background: linear-gradient(180deg, #1a1814 0%, #232018 100%);
-    border-right: 1px solid #3a352c;
+    overflow: hidden;
+    z-index: 200;
+  }
+
+  .sidebar-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('janko-ferlic-sfL_QOnmy00-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.18) saturate(0.6);
+    transform: scale(1.05);
+    transition: transform 8s ease;
+  }
+
+  .sidebar:hover .sidebar-bg { transform: scale(1.1); }
+
+  .sidebar-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(10,8,6,0.88) 0%,
+      rgba(20,18,14,0.72) 50%,
+      rgba(10,8,6,0.94) 100%);
+  }
+
+  .sidebar-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
     overflow-y: auto;
     padding: 2.5rem 1.8rem;
-    z-index: 200;
-    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
   }
 
-  .sidebar::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .sidebar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .sidebar::-webkit-scrollbar-thumb {
-    background: #3a352c;
-    border-radius: 3px;
-  }
+  .sidebar-content::-webkit-scrollbar { width: 3px; }
+  .sidebar-content::-webkit-scrollbar-thumb { background: rgba(212,168,74,0.3); border-radius: 2px; }
 
   .sidebar-brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-style: italic;
     color: var(--gold-light);
     margin-bottom: 2.5rem;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: color 0.4s;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid #3a352c;
+    border-bottom: 1px solid rgba(212,168,74,0.18);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
   }
 
-  .sidebar-brand:hover {
-    color: #e8d090;
-  }
+  .sidebar-brand:hover { color: #f0d080; }
 
-  .sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .sidebar-section {
-    margin-bottom: 2rem;
-  }
+  .sidebar-nav { display: flex; flex-direction: column; gap: 0.2rem; flex: 1; }
+  .sidebar-section { margin-bottom: 1.8rem; }
 
   .sidebar-section-title {
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
+    font-size: 0.57rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #7a7268;
-    margin-bottom: 0.8rem;
+    color: rgba(212,168,74,0.4);
+    margin-bottom: 0.6rem;
     font-weight: 600;
-    padding: 0.5rem 0;
+    padding: 0.4rem 0;
   }
 
   .sidebar-item {
     display: block;
-    padding: 0.7rem 1rem;
-    font-size: 0.92rem;
-    color: #b0a898;
+    padding: 0.65rem 1rem;
+    font-size: 0.87rem;
+    font-weight: 400;
+    color: rgba(200,192,178,0.75);
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 3px;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all 0.3s;
     position: relative;
-    margin-bottom: 0.2rem;
   }
 
   .sidebar-item:hover {
-    background: rgba(44, 74, 62, 0.3);
-    color: #d4b96a;
-    padding-left: 1.2rem;
+    background: rgba(44,74,62,0.22);
+    color: var(--gold-light);
+    padding-left: 1.3rem;
   }
 
   .sidebar-item.active {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-    color: #d4b96a;
-    font-weight: 500;
-    box-shadow: 0 4px 12px rgba(26, 47, 39, 0.4);
-  }
-
-  .sidebar-item.active::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: var(--gold-light);
-    border-radius: 0 2px 2px 0;
-  }
-
-  .sidebar-item.sub {
-    padding-left: 2rem;
-    font-size: 0.87rem;
-    color: #7a7268;
-    margin-bottom: 0.1rem;
-  }
-
-  .sidebar-item.sub:hover {
-    color: #d4b96a;
-    background: rgba(44, 74, 62, 0.2);
-  }
-
-  .sidebar-item.sub.active {
-    background: rgba(44, 74, 62, 0.3);
+    background: rgba(44,74,62,0.32);
     color: var(--gold-light);
+    font-weight: 500;
+    border-left: 2px solid var(--gold-light);
+    padding-left: calc(1rem - 2px);
   }
 
-  /* ═══════ MAIN CONTENT ═══════ */
-  .main-wrapper {
-    margin-left: var(--sidebar-w);
-    flex: 1;
-    background: var(--page);
+  .sidebar-photo-row {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    opacity: 0.45;
+    transition: opacity 0.5s;
+  }
+  .sidebar-photo-row:hover { opacity: 0.75; }
+  .sidebar-photo-row img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 2px;
+    filter: saturate(0.4);
   }
 
-  main {
-    min-height: 100vh;
-  }
-
+  /* ═══════ MAIN ═══════ */
+  .main-wrapper { margin-left: var(--sidebar-w); flex: 1; background: var(--page); }
+  main { min-height: 100vh; }
   .page { display: none; }
   .page.active { display: block; }
 
-  /* ═══════ HERO / HOME ═══════ */
+  /* ═══════ HERO ═══════ */
   .hero {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 0;
   }
 
   .hero-text {
-    padding: 5rem 4rem;
+    position: relative;
+    z-index: 2;
+    padding: 6rem 4rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background: var(--page);
+    overflow: hidden;
+  }
+
+  /* ghosted photo peeking behind hero text */
+  .hero-text::before {
+    content: '';
+    position: absolute;
+    bottom: -8%;
+    right: -12%;
+    width: 300px; height: 380px;
+    background-image: url('the-blowup-OAnQZ52rw64-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.055;
+    border-radius: 2px;
+    transform: rotate(-4deg);
+    pointer-events: none;
   }
 
   .hero-eyebrow {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
+    font-size: 0.63rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
   }
+  .hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
 
   .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 5vw, 4.2rem);
-    line-height: 1.15;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5.5vw, 5.2rem);
+    line-height: 1.05;
     color: var(--ink);
-    margin-bottom: 1.5rem;
-    font-weight: 700;
+    margin-bottom: 1.8rem;
+    font-weight: 300;
   }
-
-  .hero-title em {
-    color: var(--accent);
-    font-style: italic;
-  }
+  .hero-title em { color: var(--accent); font-style: italic; font-weight: 400; }
 
   .hero-sub {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--ink-light);
-    max-width: 480px;
-    margin-bottom: 2.5rem;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--ink-muted);
+    max-width: 400px;
+    margin-bottom: 3rem;
+    font-weight: 300;
   }
 
   .btn-primary {
     display: inline-block;
-    padding: 0.85rem 2.2rem;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-    color: #d4b96a;
-    font-size: 0.85rem;
+    padding: 0.9rem 2.4rem;
+    background: var(--accent);
+    color: var(--gold-pale);
+    font-size: 0.73rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    text-decoration: none;
     border: none;
     cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.3s;
-    box-shadow: 0 4px 12px rgba(26, 47, 39, 0.3);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(26, 47, 39, 0.45);
-  }
-
-  .btn-ghost {
-    display: inline-block;
-    padding: 0.85rem 2.2rem;
-    background: transparent;
-    color: var(--accent);
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    border: 2px solid var(--accent);
-    cursor: pointer;
-    margin-left: 1rem;
-    border-radius: 4px;
-    transition: all 0.3s;
-  }
-
-  .btn-ghost:hover {
-    background: var(--accent-soft);
-    transform: translateY(-2px);
-  }
-
-  .hero-visual {
-    background: #1a1814;
-    height: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
+    transition: all 0.35s;
     position: relative;
     overflow: hidden;
   }
-
-  .hero-visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0; left: 0;
-    opacity: 0.75;
-  }
-
-  .hero-visual::before {
+  .btn-primary::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(26,24,20,0.6) 0%, transparent 60%);
-    z-index: 1;
+    background: var(--gold-light);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+    z-index: 0;
+  }
+  .btn-primary:hover::after { transform: scaleX(1); }
+  .btn-primary span { position: relative; z-index: 1; }
+  .btn-primary:hover { color: var(--ink); }
+
+  .btn-ghost {
+    display: inline-block;
+    padding: 0.9rem 2.4rem;
+    background: transparent;
+    color: var(--ink-muted);
+    font-size: 0.73rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid var(--rule);
+    cursor: pointer;
+    margin-left: 1rem;
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Hero right: photo collage */
+  .hero-visual { position: relative; overflow: hidden; }
+
+  .hero-collage {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: 55% 45%;
+    grid-template-columns: 55% 45%;
+    gap: 3px;
   }
 
-  .quote-block {
-    display: none;
+  .hero-collage-item { overflow: hidden; }
+  .hero-collage-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 14s ease;
+    filter: saturate(0.72) brightness(0.88);
+  }
+  .hero-collage-item:hover img { transform: scale(1.07); }
+  .hero-collage-item:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .hero-collage-item:nth-child(2) { grid-column: 2; grid-row: 1 / span 2; }
+  .hero-collage-item:nth-child(3) { grid-column: 1; grid-row: 2; }
+
+  /* Gold left seam */
+  .hero-visual::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--gold-light), transparent 40%, var(--gold-light));
+    z-index: 5;
   }
 
-  /* ═══════ SECTION PAGES ═══════ */
+  .hero-caption {
+    position: absolute;
+    bottom: 2.5rem; left: 2rem;
+    z-index: 6;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255,255,255,0.72);
+    letter-spacing: 0.03em;
+    text-shadow: 0 1px 14px rgba(0,0,0,0.75);
+    line-height: 1.6;
+    border-left: 2px solid rgba(212,168,74,0.55);
+    padding-left: 1rem;
+  }
+
+  /* ═══════ PAGE PHOTO BANNER ═══════ */
+  .page-photo-banner {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+  }
+  .page-photo-banner img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.42) saturate(0.65);
+  }
+  .page-photo-banner::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 55%;
+    background: linear-gradient(to top, var(--page), transparent);
+    z-index: 2;
+  }
+  .page-photo-banner-text {
+    position: absolute;
+    bottom: 2.5rem; left: 4rem;
+    z-index: 3; color: white;
+  }
+  .page-photo-banner-text .page-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .page-photo-banner-text .page-label::before { content: ''; width: 18px; height: 1px; background: var(--gold-light); }
+  .page-photo-banner-text .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300;
+    color: #f5f0e8;
+    background: none;
+    -webkit-text-fill-color: #f5f0e8;
+    line-height: 1.1;
+  }
+
+  /* ═══════ SECTION CONTAINERS ═══════ */
   .section-container {
     padding: 3rem 4rem;
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
   }
-
-  .page-header {
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px solid var(--gold-light);
-  }
-
-  .page-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-  }
-
-  .page-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    color: var(--ink);
-    margin-bottom: 1rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--ink) 0%, var(--accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
   .page-subtitle {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--ink-light);
-    max-width: 700px;
+    font-size: 1rem; line-height: 1.85;
+    color: var(--ink-muted);
+    max-width: 600px;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
   }
 
-  /* ═══════ ASSIGNMENTS GRID ═══════ */
+  /* ═══════ ASSIGNMENT CARDS (photo bg) ═══════ */
   .assignments-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
     margin-top: 2rem;
   }
 
   .assignment-card {
-    background: linear-gradient(135deg, #ffffff 0%, #faf9f5 100%);
-    padding: 2.5rem;
-    border-radius: 12px;
-    border: 1px solid var(--rule);
-    border-top: 2px solid var(--gold-light);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     position: relative;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.45s ease;
     overflow: hidden;
+    min-height: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
   }
 
-  .assignment-card::after {
-    content: '';
-    position: absolute;
-    bottom: -50%;
-    right: -20%;
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
-    border-radius: 50%;
-    transition: all 0.3s ease;
+  .assignment-card-bg {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.7s ease, filter 0.45s ease;
+    filter: brightness(0.52) saturate(0.65);
   }
 
+  .assignment-card:hover .assignment-card-bg {
+    transform: scale(1.07);
+    filter: brightness(0.35) saturate(0.5);
+  }
+
+  /* bottom-to-top scrim */
   .assignment-card::before {
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(8,6,4,0.94) 0%, rgba(8,6,4,0.25) 55%, transparent 100%);
     z-index: 1;
+    transition: background 0.45s;
   }
-
-  .assignment-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 32px rgba(44, 74, 62, 0.15);
-    border-color: var(--accent);
-    border-top-color: var(--accent);
-  }
-
   .assignment-card:hover::before {
-    transform: scaleX(1);
+    background: linear-gradient(to top, rgba(8,6,4,0.97) 0%, rgba(8,6,4,0.5) 65%, rgba(8,6,4,0.1) 100%);
   }
 
-  .assignment-card:hover::after {
-    bottom: -30%;
-    right: -10%;
+  /* top gold shimmer */
+  .assignment-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.45s;
+  }
+  .assignment-card:hover::after { opacity: 1; }
+
+  .assignment-card-content {
+    position: relative;
+    z-index: 3;
+    padding: 2rem;
   }
 
   .assignment-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--gold-light);
     margin-bottom: 0.5rem;
     font-weight: 600;
   }
 
   .assignment-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: var(--ink);
-    margin-bottom: 1rem;
-    font-weight: 700;
-    line-height: 1.3;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.65rem;
+    color: #f0ebe0;
+    margin-bottom: 0.8rem;
+    font-weight: 400;
+    line-height: 1.2;
   }
 
   .assignment-desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--ink-light);
-    margin-bottom: 1.5rem;
+    font-size: 0.86rem;
+    line-height: 1.7;
+    color: rgba(218,208,192,0.72);
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.55s ease, opacity 0.4s;
+    opacity: 0;
   }
+  .assignment-card:hover .assignment-desc { max-height: 110px; opacity: 1; }
 
   .assignment-meta {
-    font-size: 0.8rem;
-    color: var(--ink-muted);
+    font-size: 0.68rem;
+    color: rgba(212,168,74,0.65);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     font-weight: 500;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .assignment-meta::before { content: ''; width: 12px; height: 1px; background: var(--gold-light); opacity: 0.6; }
+
+  /* ═══════ PHOTO DIVIDER ═══════ */
+  .photo-divider {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-divider img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.48) saturate(0.6);
+    transform: scale(1.04);
+  }
+  .photo-divider::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--page) 0%, transparent 18%, transparent 82%, var(--page) 100%);
+    z-index: 1;
+  }
+  .photo-divider-text {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255,255,255,0.68);
+    letter-spacing: 0.07em;
   }
 
   /* ═══════ DETAIL PAGE ═══════ */
   .detail-header {
-    background: linear-gradient(135deg, #1a1814 0%, #2c2820 50%, #1e1c18 100%);
-    padding: 4rem 4rem;
-    margin-bottom: 3rem;
-    border-bottom: 2px solid var(--gold-light);
     position: relative;
+    height: 310px;
     overflow: hidden;
   }
 
-  .detail-header::before {
+  .detail-header-bg {
+    position: absolute; inset: 0;
+  }
+  .detail-header-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.28) saturate(0.55);
+    transition: filter 0.5s;
+  }
+  .detail-header-bg::after {
     content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(139, 105, 20, 0.2) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
-  .detail-header .page-label {
-    color: var(--gold-light);
-  }
-
-  .detail-header .page-title {
-    background: linear-gradient(135deg, #f5f1ea 0%, var(--gold-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .detail-header p[style] {
-    color: #b0a898 !important;
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, rgba(8,6,4,0.92) 25%, transparent 100%),
+      linear-gradient(to top, var(--page) 0%, transparent 30%);
   }
 
   .detail-header-content {
+    position: absolute;
+    bottom: 2.5rem; left: 4rem; right: 4rem;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    max-width: 900px;
-    margin: 0 auto;
-    gap: 2rem;
+    align-items: flex-end;
+    z-index: 2;
   }
 
-  .stages-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  .detail-header-content .page-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 0.6rem;
   }
+  .detail-header-content .page-label::before { content: ''; width: 18px; height: 1px; background: var(--gold-light); }
+
+  .detail-header-content .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300;
+    color: #f0ebe0;
+    background: none;
+    -webkit-text-fill-color: #f0ebe0;
+    line-height: 1.1;
+  }
+
+  .detail-header-content p {
+    color: rgba(200,190,175,0.75) !important;
+    font-size: 0.91rem !important;
+    line-height: 1.75 !important;
+    margin-top: 0.8rem !important;
+    font-weight: 300 !important;
+    max-width: 500px;
+  }
+
+  /* ═══════ STAGE BLOCKS ═══════ */
+  .stages-list { display: flex; flex-direction: column; gap: 1.5rem; }
 
   .stage-block {
-    background: linear-gradient(135deg, #ffffff 0%, #faf9f5 100%);
+    background: white;
     padding: 2.5rem;
-    border-radius: 12px;
-    border-left: 5px solid var(--accent);
-    border-top: 1px solid var(--gold-light);
-    border-right: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    box-shadow: 0 4px 16px rgba(184, 92, 56, 0.08);
-    transition: all 0.3s ease;
+    border-radius: 3px;
+    border-left: 3px solid var(--accent);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.055);
+    transition: all 0.35s ease;
     position: relative;
     overflow: hidden;
   }
 
-  .stage-block::before {
+  /* ghosted photo corner */
+  .stage-block::after {
     content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, rgba(201, 168, 76, 0.1) 0%, transparent 70%);
-    border-radius: 50%;
+    position: absolute; top: 0; right: 0;
+    width: 150px; height: 150px;
+    background-image: url('mike-tinnion-3ym6i13Y9LU-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.04;
+    border-radius: 0 3px 0 60%;
+    transition: opacity 0.4s;
   }
+  .stage-block:hover::after { opacity: 0.1; }
 
   .stage-block:hover {
-    box-shadow: 0 12px 32px rgba(44, 74, 62, 0.15);
-    transform: translateY(-6px);
+    box-shadow: 0 8px 32px rgba(44,74,62,0.1);
+    transform: translateX(5px);
     border-left-color: var(--gold);
   }
 
   .stage-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    font-size: 0.59rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 0.5rem;
     font-weight: 600;
+    display: flex; align-items: center; gap: 0.5rem;
   }
+  .stage-label::before { content: ''; width: 12px; height: 1px; background: var(--accent); }
 
   .stage-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
     color: var(--ink);
     margin-bottom: 1rem;
-    font-weight: 700;
-    position: relative;
-    padding-left: 1rem;
-  }
-
-  .stage-title::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.3rem;
-    width: 4px;
-    height: 1.2rem;
-    background: linear-gradient(180deg, var(--accent) 0%, var(--gold) 100%);
-    border-radius: 2px;
+    font-weight: 400;
+    line-height: 1.2;
   }
 
   .stage-desc {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--ink-light);
-    margin-bottom: 1.2rem;
+    font-size: 0.93rem;
+    line-height: 1.85;
+    color: var(--ink-muted);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
   }
 
   .file-link {
-    display: inline-block;
-    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.73rem;
     font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--accent);
     text-decoration: none;
-    padding: 0.5rem 0;
-    border-bottom: 2px solid transparent;
+    padding: 0.65rem 1.4rem;
+    border: 1px solid var(--accent);
     transition: all 0.3s;
   }
+  .file-link:hover { background: var(--accent); color: var(--gold-pale); }
 
-  .file-link:hover {
-    color: var(--accent-dark);
-    border-bottom-color: var(--accent);
-  }
-
-  /* ═══════ ESSAY CONTENT ═══════ */
+  /* ═══════ ESSAY / REFLECTION ═══════ */
   .essay-content {
     background: white;
-    padding: 3rem;
-    border-radius: 8px;
-    line-height: 1.9;
+    padding: 3.5rem;
+    border-radius: 3px;
+    line-height: 1.95;
     font-size: 1rem;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .essay-photo-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 130px;
+    overflow: hidden;
+    margin: -3.5rem -3.5rem 3rem;
+    gap: 2px;
+  }
+  .essay-photo-bar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.65) saturate(0.55);
   }
 
   .essay-content h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
     color: var(--ink);
     margin-bottom: 1.5rem;
-    margin-top: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--gold-light);
+    margin-top: 2.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--cream);
+    font-weight: 400;
   }
+  .essay-content h2:first-child { margin-top: 0; }
+  .essay-content p { margin-bottom: 1.4rem; color: var(--ink-light); text-align: justify; font-weight: 300; }
 
-  .essay-content h2:first-child {
-    margin-top: 0;
-  }
+  .reflection-container { max-width: 860px; margin: 0 auto; padding: 3rem 4rem; }
 
-  .essay-content p {
-    margin-bottom: 1.3rem;
-    color: var(--ink-light);
-    text-align: justify;
-  }
-
-  /* ═══════ REFLECTION ═══════ */
-  .reflection-container {
-    max-width: 850px;
-    margin: 0 auto;
-    padding: 3rem 4rem;
-  }
-
-  .reflection-nav {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 3rem;
-    border-bottom: 2px solid var(--rule);
-    flex-wrap: wrap;
-  }
-
-  .reflection-tab {
-    padding: 1rem 1.5rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--ink-light);
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.8rem;
-  }
-
-  .reflection-tab:hover {
-    color: var(--accent);
-  }
-
-  .reflection-tab.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-
-  .reflection-section {
-    display: none;
-  }
-
-  .reflection-section.active {
-    display: block;
-  }
-
-  .reflection-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: var(--ink);
-    margin-bottom: 2rem;
-    font-weight: 700;
-  }
-
-  .reflection-section p {
-    font-size: 1rem;
-    line-height: 1.9;
-    color: var(--ink-light);
-    margin-bottom: 1.5rem;
-  }
-
-  /* ═══════ IMAGE STRIP ═══════ */
-  .image-strip {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    height: 220px;
-    overflow: hidden;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    margin: 3rem 0;
-  }
-
-  .image-strip-item {
-    overflow: hidden;
-    position: relative;
-  }
-
-  .image-strip-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-    filter: saturate(0.8) contrast(1.05);
-  }
-
-  .image-strip-item:hover img {
-    transform: scale(1.08);
-    filter: saturate(1) contrast(1.1);
-  }
+  .reflection-section { display: none; }
+  .reflection-section.active { display: block; }
+  .reflection-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--ink); margin-bottom: 2rem; font-weight: 400; }
+  .reflection-section p { font-size: 1rem; line-height: 1.95; color: var(--ink-light); margin-bottom: 1.5rem; font-weight: 300; }
 
   /* ═══════ RESPONSIVE ═══════ */
   @media (max-width: 900px) {
-    :root {
-      --sidebar-w: 240px;
-    }
-
-    .section-container {
-      padding: 2rem;
-    }
-
-    .hero {
-      grid-template-columns: 1fr;
-    }
-
-    .hero-text {
-      padding: 3rem 2rem;
-    }
-
-    .hero-visual {
-      display: none;
-    }
-
-    .detail-header-content {
-      flex-direction: column;
-    }
+    :root { --sidebar-w: 220px; }
+    .section-container { padding: 2rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-text { padding: 3.5rem 2.5rem; }
+    .hero-visual { height: 50vh; }
+    .detail-header-content { flex-direction: column; }
+    .essay-photo-bar { height: 90px; }
   }
 
   @media (max-width: 600px) {
-    :root {
-      --sidebar-w: 0;
-    }
-
-    .sidebar {
-      display: none;
-    }
-
-    .main-wrapper {
-      margin-left: 0;
-    }
-
-    .section-container,
-    .reflection-container,
-    .detail-header {
-      padding: 1.5rem;
-    }
-
-    .assignments-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .page-title {
-      font-size: 2rem;
-    }
+    :root { --sidebar-w: 0; }
+    .sidebar { display: none; }
+    .main-wrapper { margin-left: 0; }
+    .section-container, .reflection-container { padding: 1.5rem; }
+    .assignments-grid { grid-template-columns: 1fr; }
+    .essay-photo-bar { height: 80px; margin: -3.5rem -3.5rem 2rem; }
+    .detail-header-content { left: 1.5rem; right: 1.5rem; }
+    .page-photo-banner-text { left: 1.5rem; }
   }
 </style>
 </head>
@@ -742,29 +729,32 @@
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="sidebar-brand" onclick="navigate('home')">✦ Growing As a Writer</div>
-
-  <nav class="sidebar-nav">
-    <!-- Section 1: Core Pages -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Main</div>
-      <a class="sidebar-item" id="nav-home" onclick="navigate('home')">Home</a>
+  <div class="sidebar-bg"></div>
+  <div class="sidebar-overlay"></div>
+  <div class="sidebar-content">
+    <div class="sidebar-brand" onclick="navigate('home')">✦ Growing<br>As a Writer</div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Main</div>
+        <a class="sidebar-item" id="nav-home" onclick="navigate('home')">Home</a>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Essays</div>
+        <a class="sidebar-item" id="nav-essay1" onclick="openAssignment(1); highlightNavItem('nav-essay1')">Essay 1 — Lost in Translation</a>
+        <a class="sidebar-item" id="nav-essay2" onclick="openAssignment(2); highlightNavItem('nav-essay2')">Essay 2 — What Congenial Means</a>
+        <a class="sidebar-item" id="nav-essay3" onclick="openAssignment(3); highlightNavItem('nav-essay3')">Essay 3 — Institutional Myth</a>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Reflection</div>
+        <a class="sidebar-item" id="nav-reflection" onclick="navigate('reflection')">Self-Reflection</a>
+      </div>
+    </nav>
+    <div class="sidebar-photo-row">
+      <img src="the-blowup-OAnQZ52rw64-unsplash.jpg" alt="">
+      <img src="beku-kanomi-c4vUTnU7Q3o-unsplash.jpg" alt="">
+      <img src="nedimshoots-6CQy1skIbRs-unsplash.jpg" alt="">
     </div>
-
-    <!-- Section 2: Essays -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Essays</div>
-      <a class="sidebar-item" id="nav-essay1" onclick="openAssignment(1); highlightNavItem('nav-essay1')">Essay 1</a>
-      <a class="sidebar-item" id="nav-essay2" onclick="openAssignment(2); highlightNavItem('nav-essay2')">Essay 2</a>
-      <a class="sidebar-item" id="nav-essay3" onclick="openAssignment(3); highlightNavItem('nav-essay3')">Essay 3</a>
-    </div>
-
-    <!-- Section 3: Reflection -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Reflection</div>
-      <a class="sidebar-item" id="nav-reflection" onclick="navigate('reflection')">Self-Reflection</a>
-    </div>
-  </nav>
+  </div>
 </aside>
 
 <!-- MAIN CONTENT -->
@@ -775,119 +765,125 @@
     <div class="page active" id="page-home">
       <div class="hero">
         <div class="hero-text">
-          <p class="hero-eyebrow">Writing Portfolio</p>
-          <h1 class="hero-title">Growing As<em> a Writer</em></h1>
+          <p class="hero-eyebrow">Writing Portfolio · ENGL 101</p>
+          <h1 class="hero-title">Growing As<br><em>a Writer</em></h1>
           <p class="hero-sub">A semester of writing, revision, and discovery. This portfolio documents not just finished pieces, but the thinking that happens in the space between drafts.</p>
-          <button class="btn-primary" onclick="navigate('assignments')">Explore Assignments</button>
-          <button class="btn-ghost" onclick="navigate('reflection')">Read Reflection</button>
+          <div>
+            <button class="btn-primary" onclick="navigate('assignments')"><span>Explore Essays</span></button>
+            <button class="btn-ghost" onclick="navigate('reflection')">Read Reflection</button>
+          </div>
         </div>
         <div class="hero-visual">
-          <img src="florian-klauer-mk7D-4UCfmg-unsplash.jpg" alt="Typewriter" />
-          <div class="quote-block"></div>
+          <div class="hero-collage">
+            <div class="hero-collage-item"><img src="florian-klauer-mk7D-4UCfmg-unsplash.jpg" alt="Typewriter"></div>
+            <div class="hero-collage-item"><img src="janko-ferlic-sfL_QOnmy00-unsplash.jpg" alt="Library"></div>
+            <div class="hero-collage-item"><img src="nedimshoots-6CQy1skIbRs-unsplash.jpg" alt="Handwriting"></div>
+          </div>
+          <div class="hero-caption">"I write to understand<br>what I already know."</div>
         </div>
       </div>
     </div>
 
     <!-- ASSIGNMENTS PAGE -->
     <div class="page" id="page-assignments">
-      <div class="image-strip">
-        <div class="image-strip-item"><img src="the-blowup-OAnQZ52rw64-unsplash.jpg" alt="Writing"></div>
-        <div class="image-strip-item"><img src="beku-kanomi-c4vUTnU7Q3o-unsplash.jpg" alt="Fountain pen"></div>
-        <div class="image-strip-item"><img src="nedimshoots-6CQy1skIbRs-unsplash.jpg" alt="Handwriting"></div>
-        <div class="image-strip-item"><img src="mike-tinnion-3ym6i13Y9LU-unsplash.jpg" alt="Notebook"></div>
-        <div class="image-strip-item"><img src="janko-ferlic-sfL_QOnmy00-unsplash.jpg" alt="Library"></div>
+      <div class="page-photo-banner">
+        <img src="mike-tinnion-3ym6i13Y9LU-unsplash.jpg" alt="Notebooks">
+        <div class="page-photo-banner-text">
+          <p class="page-label">Assignments</p>
+          <h1 class="page-title">Writing Work</h1>
+        </div>
       </div>
       <div class="section-container">
-        <div class="page-header">
-          <p class="page-label">Assignments</p>
-          <h1 class="page-title">Your Writing Work</h1>
-          <p class="page-subtitle">Four major assignments, each showing multiple stages of revision and thinking. Click any assignment to explore its development process.</p>
-        </div>
-
+        <p class="page-subtitle">Four major assignments, each showing multiple stages of revision and thinking. Click any essay to explore its full development process.</p>
         <div class="assignments-grid">
           <div class="assignment-card" onclick="openAssignment(1)">
-            <p class="assignment-label">Essay 01</p>
-            <h2 class="assignment-title">Lost in Translation</h2>
-            <p class="assignment-desc">A personal narrative about navigating a new culture and language as an American student in Burkina Faso — and what it taught me about identity, resilience, and belonging.</p>
-            <p class="assignment-meta">5 Stages</p>
-            <p class="assignment-label">Essay 02</p>
-            <h2 class="assignment-title">What Congenial Really Means</h2>
-            <p class="assignment-desc">A definition essay arguing that in Brent Staples' "Black Men and Public Space," congeniality is not friendliness — it is performing friendliness as a survival strategy.</p>
-            <p class="assignment-meta">5 Stages</p>
+            <div class="assignment-card-bg" style="background-image: url('the-blowup-OAnQZ52rw64-unsplash.jpg');"></div>
+            <div class="assignment-card-content">
+              <p class="assignment-label">Essay 01</p>
+              <h2 class="assignment-title">Lost in Translation</h2>
+              <p class="assignment-desc">A personal narrative about navigating a new culture and language as an American student in Burkina Faso — and what it taught me about identity, resilience, and belonging.</p>
+              <p class="assignment-meta">5 Stages</p>
+            </div>
           </div>
-
+          <div class="assignment-card" onclick="openAssignment(2)">
+            <div class="assignment-card-bg" style="background-image: url('beku-kanomi-c4vUTnU7Q3o-unsplash.jpg');"></div>
+            <div class="assignment-card-content">
+              <p class="assignment-label">Essay 02</p>
+              <h2 class="assignment-title">What Congenial Really Means</h2>
+              <p class="assignment-desc">A definition essay arguing that in Brent Staples' "Black Men and Public Space," congeniality is not friendliness — it is performing friendliness as a survival strategy.</p>
+              <p class="assignment-meta">5 Stages</p>
+            </div>
+          </div>
           <div class="assignment-card" onclick="openAssignment(3)">
-            <p class="assignment-label">Essay 03</p>
-            <h2 class="assignment-title">Institutional Protection Is a Myth</h2>
-            <p class="assignment-desc">A research argument paper using Derrick Bell's The Space Traders and Kimberlé Crenshaw's critical race theory to argue that institutional protection of minority rights is always contingent on self-interest.</p>
-            <p class="assignment-meta">4 Stages</p>
+            <div class="assignment-card-bg" style="background-image: url('janko-ferlic-sfL_QOnmy00-unsplash.jpg');"></div>
+            <div class="assignment-card-content">
+              <p class="assignment-label">Essay 03</p>
+              <h2 class="assignment-title">Institutional Protection Is a Myth</h2>
+              <p class="assignment-desc">A research argument paper using Derrick Bell's The Space Traders and Kimberlé Crenshaw's framework to argue that institutional protection is always contingent on self-interest.</p>
+              <p class="assignment-meta">4 Stages</p>
+            </div>
           </div>
-
           <div class="assignment-card" onclick="openAssignment(4)">
-            <p class="assignment-label">Reflective Essay</p>
-            <h2 class="assignment-title">Writing Across Two Worlds</h2>
-            <p class="assignment-desc">A semester-end reflective essay accounting honestly for growth achieved and skills still in progress — submitted May 13, 2026.</p>
-            <p class="assignment-meta">1 Stage</p>
+            <div class="assignment-card-bg" style="background-image: url('florian-klauer-mk7D-4UCfmg-unsplash.jpg');"></div>
+            <div class="assignment-card-content">
+              <p class="assignment-label">Reflective Essay</p>
+              <h2 class="assignment-title">Writing Across Two Worlds</h2>
+              <p class="assignment-desc">A semester-end reflective essay accounting honestly for growth achieved and skills still in progress — submitted May 13, 2026.</p>
+              <p class="assignment-meta">1 Stage</p>
+            </div>
           </div>
         </div>
+      </div>
+      <div class="photo-divider">
+        <img src="nedimshoots-6CQy1skIbRs-unsplash.jpg" alt="">
+        <div class="photo-divider-text">Every draft is a step forward</div>
       </div>
     </div>
 
     <!-- ASSIGNMENT DETAIL PAGE -->
     <div class="page" id="page-assignment-detail">
       <div class="detail-header">
-        <div class="detail-header-content" id="detail-header-content">
-          <!-- Populated by JS -->
+        <div class="detail-header-bg">
+          <img src="the-blowup-OAnQZ52rw64-unsplash.jpg" alt="" id="detail-bg-img">
         </div>
+        <div class="detail-header-content" id="detail-header-content"></div>
       </div>
-
       <div class="section-container">
-        <div class="stages-list" id="detail-stages-content">
-          <!-- Populated by JS -->
-        </div>
+        <div class="stages-list" id="detail-stages-content"></div>
       </div>
     </div>
 
     <!-- REFLECTION PAGE -->
     <div class="page" id="page-reflection">
       <div class="detail-header">
+        <div class="detail-header-bg">
+          <img src="janko-ferlic-sfL_QOnmy00-unsplash.jpg" alt="">
+        </div>
         <div class="detail-header-content">
           <div>
             <p class="page-label">Reflective Essay</p>
             <h1 class="page-title">Writing Across Two Worlds</h1>
-            <p style="margin-top:1rem;font-size:0.95rem;line-height:1.7;color:var(--ink-light);max-width:600px;">A Semester of Growth and Unfinished Work — Melchior Sanwidi · ENGL 101-30446 · Professor Atkins · 13 May 2026</p>
+            <p>A Semester of Growth and Unfinished Work<br>Melchior Sanwidi · ENGL 101-30446 · Professor Atkins · 13 May 2026</p>
           </div>
         </div>
       </div>
-
       <div class="section-container">
         <div class="essay-content">
+          <div class="essay-photo-bar">
+            <img src="the-blowup-OAnQZ52rw64-unsplash.jpg" alt="">
+            <img src="mike-tinnion-3ym6i13Y9LU-unsplash.jpg" alt="">
+            <img src="beku-kanomi-c4vUTnU7Q3o-unsplash.jpg" alt="">
+          </div>
           <h2>Writing Across Two Worlds: A Semester of Growth and Unfinished Work</h2>
-          <p>
-            Writing has never been a neutral act for me. Long before I enrolled in ENGL 101, I had already experienced what it means to lose language — to sit in a classroom in Burkina Faso, surrounded by students who understood everything, and understand almost nothing. That experience of being lost in translation shaped how I approach communication, and it is part of why this semester's writing assignments felt personal in a way that academic work does not always feel. Reviewing the essays I have written — my narrative essay, "Lost in Translation," and my argument essay, "Institutional Protection Is a Myth" — I can trace a clear line of growth, even as I recognize the skills I have not yet mastered. I feel most competent in two course outcomes: writing essays that demonstrate facility with grammar and mechanics (EW) and developing unified essays that present central ideas supported by relevant personal experience, critical thought, and readings (EW). At the same time, I continue to struggle with formulating a thesis to anchor the development of a position appropriate to audience and purpose (CTRW) and developing my own ideas in relation to the words and ideas of others from instructor-selected readings (CTRW). This semester has shown me that growth as a writer is not the absence of struggle — it is learning to do something meaningful with it.
-          </p>
-          <p>
-            One of the most visible changes across my two essays is my improved control of grammar and mechanics at the sentence level. In my earliest drafts of "Lost in Translation," my sentences were often too long and ran into one another, blurring the emotional clarity that the narrative needed. I was trying to capture the disorientation of sitting in a French classroom as an American student, but fragmented or fused sentences were getting in the way of the story itself. Over the course of revising, I worked to give each sentence its own weight. The final draft shows this: moments of dialogue, such as when my classmate looks at me and says, "You didn't get that? He is literally talking about yesterday's lesson," are set apart cleanly, and the pacing of the narrative reflects a writer who is making deliberate choices about sentence rhythm rather than just transcribing memory. By the time I wrote "Institutional Protection Is a Myth," my sentences had become more complex and intentional. Paragraphs in that essay move between long analytical sentences and shorter declarative ones, which mirrors the argument's logic — building a case, then landing the point. The course outcome of writing essays that demonstrate facility with grammar and mechanics is not only about avoiding errors; it is about using sentence-level choices to serve meaning. My two essays, read side by side, show that I have moved in that direction.
-          </p>
-          <p>
-            A second area of genuine growth is my ability to develop unified essays that present central ideas supported by relevant personal experience, critical thought, and readings. "Lost in Translation" demonstrates this outcome most clearly at the personal level: every paragraph of that essay orbits the same central insight — that language is not just a tool for communication but a barrier that shapes identity and belonging. I did not state that idea at first; I learned it through the writing. The essay moves from confusion and isolation in the classroom, through the embarrassment of failing tests I had studied for, and finally to the relationships built with classmates who helped me catch up. None of those sections wanders. Each one adds to the same claim I arrive at in the conclusion: that identity is not just where one comes from, but how one adapts to a new space. My argument essay applies this same principle at a higher level of abstraction. The central claim — that institutional protection of minority rights is always contingent on institutional self-interest — is supported by the Supreme Court's refusal to hear the Space Traders case, by Professor Golightly's erasure despite his credentials, and by the convergence of government, media, church, and business around the same conclusion. Each paragraph pushes the same thesis forward. This unity did not come naturally; it came from revision, from instructor feedback, and from learning to ask at every paragraph: does this serve the central argument?
-          </p>
-          <p>
-            Despite this progress, I recognize that I have not yet mastered the outcome of formulating a thesis to anchor the development of a position appropriate to audience and purpose. This outcome asks for something more precise than an arguable claim: it asks for a thesis that is calibrated — one shaped by a writer's awareness of who is reading and why the argument matters to them. Looking at my argument essay honestly, I can see the gap. My thesis states that institutional protection is a myth and that The Space Traders reveals the true cost of depending on systems to defend marginalized people. This is a genuine argument, and it drives the essay forward. But the thesis does not yet show full rhetorical awareness. It does not signal to the reader — in this case, the English Department faculty, or a broader academic audience familiar with critical race theory — what specific lens I am using to enter the conversation, or why this argument has stakes beyond the text itself. Kimberlé Crenshaw's argument that institutional racism operates through ostensibly neutral policies is cited in my essay, but my thesis does not bring her framework into conversation with Bell's in a way that would strengthen my position for a scholarly reader. This is the work I need to do: to write thesis statements that are not just arguable but rhetorically situated — ones that show I understand my audience and have chosen my claim with that audience in mind.
-          </p>
-          <p>
-            The outcome I feel furthest from mastering is developing my own ideas in relation to the words and ideas of others from instructor-selected readings. This outcome requires a kind of intellectual conversation — one in which the writer's thinking is genuinely shaped and extended by the sources, not merely supported by them. In "Institutional Protection Is a Myth," I use two sources: Derrick Bell's "The Space Traders" and Kimberlé Crenshaw's "Mapping the Margins." I quote Bell three times in the essay, and each quotation is followed by analysis. However, when I look at what that analysis actually does, I notice that it tends to confirm what Bell has already said rather than extend or complicate it. Crenshaw appears in only one paragraph, and she is treated more as a supporting authority than as a thinker whose ideas I am putting into dialogue with Bell's. The gap between summary and analysis is one I can see in my own work, and closing it will require me to ask, at every source I use, not just "what does this say?" but "what does this mean for my argument, and how does it change what I think?"
-          </p>
-          <p>
-            The portfolio I am submitting is not a record of perfection. It is a record of a writer learning, in real time, what writing at the college level actually demands. The narrative essay gave me permission to bring my own experience into the classroom — to treat what happened to me in Burkina Faso not just as a memory but as an argument about language, identity, and belonging. The argument essay pushed me into a harder kind of thinking: analyzing a text through a theoretical lens, engaging with sources, building a case for a reader who does not know me. In both essays, I made real progress. But the two CTRW outcomes I have identified — thesis development for a specific audience and genuine intellectual engagement with sources — are not weaknesses I can leave behind. As a Business Analytics major, I know that upper-level coursework in business communications, report writing, and policy analysis will demand exactly these skills: the ability to frame an argument for a specific decision-making audience and to put outside research into meaningful conversation with my own analysis. The writing I did this semester is the foundation. The work ahead is to build on it.
-          </p>
+          <p>Writing has never been a neutral act for me. Long before I enrolled in ENGL 101, I had already experienced what it means to lose language — to sit in a classroom in Burkina Faso, surrounded by students who understood everything, and understand almost nothing. That experience of being lost in translation shaped how I approach communication, and it is part of why this semester's writing assignments felt personal in a way that academic work does not always feel. Reviewing the essays I have written — my narrative essay, "Lost in Translation," and my argument essay, "Institutional Protection Is a Myth" — I can trace a clear line of growth, even as I recognize the skills I have not yet mastered. I feel most competent in two course outcomes: writing essays that demonstrate facility with grammar and mechanics (EW) and developing unified essays that present central ideas supported by relevant personal experience, critical thought, and readings (EW). At the same time, I continue to struggle with formulating a thesis to anchor the development of a position appropriate to audience and purpose (CTRW) and developing my own ideas in relation to the words and ideas of others from instructor-selected readings (CTRW). This semester has shown me that growth as a writer is not the absence of struggle — it is learning to do something meaningful with it.</p>
+          <p>One of the most visible changes across my two essays is my improved control of grammar and mechanics at the sentence level. In my earliest drafts of "Lost in Translation," my sentences were often too long and ran into one another, blurring the emotional clarity that the narrative needed. I was trying to capture the disorientation of sitting in a French classroom as an American student, but fragmented or fused sentences were getting in the way of the story itself. Over the course of revising, I worked to give each sentence its own weight. The final draft shows this: moments of dialogue, such as when my classmate looks at me and says, "You didn't get that? He is literally talking about yesterday's lesson," are set apart cleanly, and the pacing of the narrative reflects a writer who is making deliberate choices about sentence rhythm rather than just transcribing memory. By the time I wrote "Institutional Protection Is a Myth," my sentences had become more complex and intentional. Paragraphs in that essay move between long analytical sentences and shorter declarative ones, which mirrors the argument's logic — building a case, then landing the point. The course outcome of writing essays that demonstrate facility with grammar and mechanics is not only about avoiding errors; it is about using sentence-level choices to serve meaning. My two essays, read side by side, show that I have moved in that direction.</p>
+          <p>A second area of genuine growth is my ability to develop unified essays that present central ideas supported by relevant personal experience, critical thought, and readings. "Lost in Translation" demonstrates this outcome most clearly at the personal level: every paragraph of that essay orbits the same central insight — that language is not just a tool for communication but a barrier that shapes identity and belonging. I did not state that idea at first; I learned it through the writing. The essay moves from confusion and isolation in the classroom, through the embarrassment of failing tests I had studied for, and finally to the relationships built with classmates who helped me catch up. None of those sections wanders. Each one adds to the same claim I arrive at in the conclusion: that identity is not just where one comes from, but how one adapts to a new space. My argument essay applies this same principle at a higher level of abstraction. The central claim — that institutional protection of minority rights is always contingent on institutional self-interest — is supported by the Supreme Court's refusal to hear the Space Traders case, by Professor Golightly's erasure despite his credentials, and by the convergence of government, media, church, and business around the same conclusion. Each paragraph pushes the same thesis forward. This unity did not come naturally; it came from revision, from instructor feedback, and from learning to ask at every paragraph: does this serve the central argument?</p>
+          <p>Despite this progress, I recognize that I have not yet mastered the outcome of formulating a thesis to anchor the development of a position appropriate to audience and purpose. This outcome asks for something more precise than an arguable claim: it asks for a thesis that is calibrated — one shaped by a writer's awareness of who is reading and why the argument matters to them. Looking at my argument essay honestly, I can see the gap. My thesis states that institutional protection is a myth and that The Space Traders reveals the true cost of depending on systems to defend marginalized people. This is a genuine argument, and it drives the essay forward. But the thesis does not yet show full rhetorical awareness. It does not signal to the reader — in this case, the English Department faculty, or a broader academic audience familiar with critical race theory — what specific lens I am using to enter the conversation, or why this argument has stakes beyond the text itself. Kimberlé Crenshaw's argument that institutional racism operates through ostensibly neutral policies is cited in my essay, but my thesis does not bring her framework into conversation with Bell's in a way that would strengthen my position for a scholarly reader. This is the work I need to do: to write thesis statements that are not just arguable but rhetorically situated — ones that show I understand my audience and have chosen my claim with that audience in mind.</p>
+          <p>The outcome I feel furthest from mastering is developing my own ideas in relation to the words and ideas of others from instructor-selected readings. This outcome requires a kind of intellectual conversation — one in which the writer's thinking is genuinely shaped and extended by the sources, not merely supported by them. In "Institutional Protection Is a Myth," I use two sources: Derrick Bell's "The Space Traders" and Kimberlé Crenshaw's "Mapping the Margins." I quote Bell three times in the essay, and each quotation is followed by analysis. However, when I look at what that analysis actually does, I notice that it tends to confirm what Bell has already said rather than extend or complicate it. Crenshaw appears in only one paragraph, and she is treated more as a supporting authority than as a thinker whose ideas I am putting into dialogue with Bell's. The gap between summary and analysis is one I can see in my own work, and closing it will require me to ask, at every source I use, not just "what does this say?" but "what does this mean for my argument, and how does it change what I think?"</p>
+          <p>The portfolio I am submitting is not a record of perfection. It is a record of a writer learning, in real time, what writing at the college level actually demands. The narrative essay gave me permission to bring my own experience into the classroom — to treat what happened to me in Burkina Faso not just as a memory but as an argument about language, identity, and belonging. The argument essay pushed me into a harder kind of thinking: analyzing a text through a theoretical lens, engaging with sources, building a case for a reader who does not know me. In both essays, I made real progress. But the two CTRW outcomes I have identified — thesis development for a specific audience and genuine intellectual engagement with sources — are not weaknesses I can leave behind. As a Business Analytics major, I know that upper-level coursework in business communications, report writing, and policy analysis will demand exactly these skills: the ability to frame an argument for a specific decision-making audience and to put outside research into meaningful conversation with my own analysis. The writing I did this semester is the foundation. The work ahead is to build on it.</p>
           <h2>Works Cited</h2>
-          <p>
-            Bell, Derrick. "The Space Traders." <em>Dark Matter: A Century of Speculative Fiction from the African Diaspora</em>, edited by Sheree R. Thomas, Warner Books, 2000, pp. 327–355.
-          </p>
-          <p>
-            Crenshaw, Kimberlé. "Mapping the Margins: Intersectionality, Identity Politics, and Violence against Women of Color." <em>Stanford Law Review</em>, vol. 43, no. 6, 1991, pp. 1241–1299. JSTOR, www.jstor.org/stable/1229039.
-          </p>
+          <p>Bell, Derrick. "The Space Traders." <em>Dark Matter: A Century of Speculative Fiction from the African Diaspora</em>, edited by Sheree R. Thomas, Warner Books, 2000, pp. 327–355.</p>
+          <p>Crenshaw, Kimberlé. "Mapping the Margins: Intersectionality, Identity Politics, and Violence against Women of Color." <em>Stanford Law Review</em>, vol. 43, no. 6, 1991, pp. 1241–1299. JSTOR, www.jstor.org/stable/1229039.</p>
         </div>
       </div>
     </div>
@@ -896,123 +892,55 @@
 </div>
 
 <script>
+const essayPhotos = {
+  1: 'the-blowup-OAnQZ52rw64-unsplash.jpg',
+  2: 'beku-kanomi-c4vUTnU7Q3o-unsplash.jpg',
+  3: 'janko-ferlic-sfL_QOnmy00-unsplash.jpg',
+  4: 'florian-klauer-mk7D-4UCfmg-unsplash.jpg'
+};
+
 const assignments = {
   1: {
     title: "Essay 1: Personal Narrative",
     label: "Essay 1",
-    description: "\"Lost in Translation\" — a personal narrative about navigating a new culture and language as an American student in Burkina Faso. Six stages documenting the full writing process from initial brainstorm through final draft.",
+    description: '"Lost in Translation" — a personal narrative about navigating a new culture and language as an American student in Burkina Faso. Five stages documenting the full writing process from initial brainstorm through final draft.',
     stages: [
-      {
-        label: "Stage 1 — Prewrite",
-        title: "Finding the Story",
-        desc: "Topic: Navigating a new culture and language in Burkina Faso. Initial observations included crowded streets compared to the U.S., incomprehensible languages, and initial excitement that turned to confusion. The classroom experience centered on rapid French lectures, difficulty understanding teachers, copying notes without full comprehension, and the feelings of failure on initial tests. The growth arc focused on developing resilience and adaptability, learning patience with myself, identity as an American adapting to a new space, and gaining confidence through true friendships.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vRbbTHcchICyAcYmcju6RtwYntVfRlH70iZCxeccK39aAv0wKdn8DYI8_Xvcz4WRw/pub"
-      },
-      {
-        label: "Stage 2 — Rough Draft",
-        title: "First Full Draft",
-        desc: "The rough draft established the core narrative arc: arriving in Burkina Faso, the disorientation of French-language schooling, early failures on tests, and eventual growth through the help of classmates. The essential scenes and dialogue were already in place — including the key exchange with the classmate who asked, \"You didn't get that? He is literally talking about yesterday's lesson.\" The conclusion reached toward a theme of identity and adaptability, though it required sharpening in revision.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vRdRDwrbGynwzlBCqewz-lIpM_6SGimvoXMv63HDAvGkq3A3XmQ9CYc-715JjtHjQ/pub"
-      },
-      {
-        label: "Stage 4 — Revision",
-        title: "Revising Toward the Final Draft",
-        desc: "Revisions addressed sentence rhythm throughout the draft, giving individual moments more weight and clarity. The conclusion was restructured to land the central claim — that identity is not just where one comes from, but how one adapts to a new space — more decisively. Run-on sentences from the early paragraphs were separated and rebalanced. The final draft reflects all of these changes.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vRdRDwrbGynwzlBCqewz-lIpM_6SGimvoXMv63HDAvGkq3A3XmQ9CYc-715JjtHjQ/pub"
-      },
-      {
-        label: "Stage 5 — Final Draft",
-        title: "Lost in Translation — Submitted",
-        desc: "Leaving a new country can completely transform a person's outlook on the world. Prior to moving to Burkina Faso, I did not really consider the subject of language or how it could impact my life. As an American citizen, I went to school in a district that had all English instruction. However, as I went to school in Burkina Faso, I quickly recognized that as an American in a French-speaking nation, my experience as a student would be completely impacted. The essay moves through confusion in the classroom, failure on early tests, the kindness of classmates who helped bridge the language gap, and arrives at a conclusion about identity: one's identity is not just where they come from, but how they adapt to a new space.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vQDYeOxKY9c2GG-wS77Fwf4iwlhwadTn1v5ffQsfWJo8k-rz0mSPEsAFuYNrNN5Tw/pub"
-      },
-      {
-        label: "Stage 6 — Self-Reflection",
-        title: "Reflecting on Essay 1",
-        desc: "Two course outcomes I achieved: using rhetorical strategies based on audience and purpose — I relied on narrative to present how being American in Burkina Faso affected my school life, focusing on a scene where I didn't understand the teacher and had to turn to a classmate; and creating cohesive essays revolving around a unifying theme supported by personal experiences. Two outcomes needing more practice: identifying and correcting major grammatical errors in my own writing, and using a thesis as a unifying device — my thesis could be sharper in the introduction to make the essay more organized at the college level. Resources used: I did not use the Writing Center, Brainfuse, or Accudemia for this assignment, though I recognize how they could help in the future.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vS0ApfAD-uQWcIfATVWimWDjiMar37WK6jvxqGC0dHedOygzl8ZGIdbTHbFvkX6ag/pub"
-      }
+      { label: "Stage 1 — Prewrite", title: "Finding the Story", desc: "Topic: Navigating a new culture and language in Burkina Faso. Initial observations included crowded streets compared to the U.S., incomprehensible languages, and initial excitement that turned to confusion. The classroom experience centered on rapid French lectures, difficulty understanding teachers, copying notes without full comprehension, and the feelings of failure on initial tests. The growth arc focused on developing resilience and adaptability, learning patience with myself, identity as an American adapting to a new space, and gaining confidence through true friendships.", file: "https://docs.google.com/document/d/e/2PACX-1vRbbTHcchICyAcYmcju6RtwYntVfRlH70iZCxeccK39aAv0wKdn8DYI8_Xvcz4WRw/pub" },
+      { label: "Stage 2 — Rough Draft", title: "First Full Draft", desc: 'The rough draft established the core narrative arc: arriving in Burkina Faso, the disorientation of French-language schooling, early failures on tests, and eventual growth through the help of classmates. The essential scenes and dialogue were already in place — including the key exchange with the classmate who asked, "You didn\'t get that? He is literally talking about yesterday\'s lesson." The conclusion reached toward a theme of identity and adaptability, though it required sharpening in revision.', file: "https://docs.google.com/document/d/e/2PACX-1vRdRDwrbGynwzlBCqewz-lIpM_6SGimvoXMv63HDAvGkq3A3XmQ9CYc-715JjtHjQ/pub" },
+      { label: "Stage 4 — Revision", title: "Revising Toward the Final Draft", desc: "Revisions addressed sentence rhythm throughout the draft, giving individual moments more weight and clarity. The conclusion was restructured to land the central claim — that identity is not just where one comes from, but how one adapts to a new space — more decisively. Run-on sentences from the early paragraphs were separated and rebalanced. The final draft reflects all of these changes.", file: "https://docs.google.com/document/d/e/2PACX-1vRdRDwrbGynwzlBCqewz-lIpM_6SGimvoXMv63HDAvGkq3A3XmQ9CYc-715JjtHjQ/pub" },
+      { label: "Stage 5 — Final Draft", title: "Lost in Translation — Submitted", desc: "Leaving a new country can completely transform a person's outlook on the world. Prior to moving to Burkina Faso, I did not really consider the subject of language or how it could impact my life. As an American citizen, I went to school in a district that had all English instruction. However, as I went to school in Burkina Faso, I quickly recognized that as an American in a French-speaking nation, my experience as a student would be completely impacted. The essay moves through confusion in the classroom, failure on early tests, the kindness of classmates who helped bridge the language gap, and arrives at a conclusion about identity: one's identity is not just where they come from, but how they adapt to a new space.", file: "https://docs.google.com/document/d/e/2PACX-1vQDYeOxKY9c2GG-wS77Fwf4iwlhwadTn1v5ffQsfWJo8k-rz0mSPEsAFuYNrNN5Tw/pub" },
+      { label: "Stage 6 — Self-Reflection", title: "Reflecting on Essay 1", desc: "Two course outcomes I achieved: using rhetorical strategies based on audience and purpose — I relied on narrative to present how being American in Burkina Faso affected my school life, focusing on a scene where I didn't understand the teacher and had to turn to a classmate; and creating cohesive essays revolving around a unifying theme supported by personal experiences. Two outcomes needing more practice: identifying and correcting major grammatical errors in my own writing, and using a thesis as a unifying device — my thesis could be sharper in the introduction to make the essay more organized at the college level.", file: "https://docs.google.com/document/d/e/2PACX-1vS0ApfAD-uQWcIfATVWimWDjiMar37WK6jvxqGC0dHedOygzl8ZGIdbTHbFvkX6ag/pub" }
     ]
   },
   2: {
     title: "Essay 2: Definition Essay",
     label: "Essay 2",
-    description: "\"What Congenial Really Means\" — a definition essay arguing that in Brent Staples' \"Black Men and Public Space,\" congeniality does not mean being friendly but rather performing friendliness as a survival strategy in a world that reads Black male presence as an automatic threat.",
+    description: '"What Congenial Really Means" — a definition essay arguing that in Brent Staples\' "Black Men and Public Space," congeniality does not mean being friendly but rather performing friendliness as a survival strategy.',
     stages: [
-      {
-        label: "Stage 1 — Prewrite",
-        title: "Planning the Definition",
-        desc: "Topic: Redefining \"congenial\" in Brent Staples' \"Black Men and Public Space.\" Standard definition: pleasant, agreeable, and friendly — a natural and genuine warmth, a voluntary expression of character. Staples' re-definition: a mask for safety, performance as a survival strategy, a deliberate effort to appear unthreatening. Evidence from the text: the walking incident in Hyde Park, Chicago; whistling classical music to put others at ease; \"smothering\" internal rage to maintain outward pleasantness; and the permanent condition of being feared.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vRVQG3lcc9-3_AfhiksofSTsmcVfycURhDMXfHzGpI-GHZEbIdGgliTN23yb9d0lA/pub"
-      },
-      {
-        label: "Stage 2 — Rough Draft",
-        title: "First Definition Draft",
-        desc: "The rough draft opened with the dictionary definition of congenial, then introduced the essay's central argument: that in Staples' essay, congeniality does not imply being friendly but rather acting in a certain manner in order to appease others. The three body paragraphs covered the Hyde Park incident, the whistling section with the cowbell analogy, and the asymmetry of the performance — Staples alone doing the work of managing the atmosphere. The Works Cited entry at this stage listed only Staples' name and essay title without full MLA formatting.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vTqyWZjmgT1UCyk0lSWzuwehysHdXQklJG9K8VyUNUg59BTcJS-SRmB0OkMCtHi3g/pub"
-      },
-      {
-        label: "Stage 4 — Revision",
-        title: "Revising Toward the Final Draft",
-        desc: "In revision, the thesis was significantly expanded and sharpened to make the survival-performance argument explicit from the first paragraph. New body paragraphs were added to cover the pattern of daily fear Staples navigates — locked car doors, people crossing streets, police encounters — as well as the moments when the performance fails (the magazine office, the jewelry store with the Doberman). The Works Cited entry was corrected to full MLA 9 format. Sentence-level editing throughout improved precision and rhythm, and the conclusion was restructured to close on the \"permanent condition\" framing.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vTqyWZjmgT1UCyk0lSWzuwehysHdXQklJG9K8VyUNUg59BTcJS-SRmB0OkMCtHi3g/pub"
-      },
-      {
-        label: "Stage 5 — Final Draft",
-        title: "What Congenial Really Means — Submitted",
-        desc: "The final essay argues that in \"Black Men and Public Space,\" congeniality does not mean being friendly — it means performing friendliness as a survival strategy in a world that reads Black male presence as an automatic threat. The essay traces this argument through five body paragraphs: the Hyde Park incident; the daily pattern of fear and avoidance Staples navigates; the whistling section and the cowbell analogy; the moments when the performance fails (magazine office, jewelry store); and the emotional cost of a performance that is entirely one-sided. The essay closes on Staples still whistling — no resolution, no final scene in which the world changes its judgment. The definition Staples lives with is not temporary. It is the permanent condition of moving through public space in a body that others have decided to fear.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vQaIBa6vCziOWeF96xQbM-2TJR7zEC_Bc8BJmDhKqrMu9-yLv-kUJwAXmZse-HUOA/pub"
-      },
-      {
-        label: "Stage 6 — Self-Reflection",
-        title: "Reflecting on Essay 2",
-        desc: "For my second essay, I chose to write a definition essay based on Brent Staples' \"Black Men and Public Space.\" I chose the word \"congenial\" because Staples uses the term while discussing his whistling practice, and its meaning in context seemed nearly opposite to its dictionary definition. After identifying the concept, I followed the format explained in class: dictionary meaning first, then a stipulated meaning as my thesis, then body paragraphs expanding on the definition. My thesis was that in Staples' essay, congeniality did not refer to friendliness, but to acting as though you were friendly as a way of surviving. I also reminded myself to avoid biographical information and concentrate on the actual contents of the text. In conclusion, the recursive approach worked well — creating an initial draft and improving upon it bit by bit was easier than aiming for perfection from the beginning.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vSpEZw84IQlcWe-k4QlJiRYYkmKEPhp6W5vLyMWRmLLiT7bUTkTN2OLByadGqQWkw/pub"
-      }
+      { label: "Stage 1 — Prewrite", title: "Planning the Definition", desc: 'Topic: Redefining "congenial" in Brent Staples\' "Black Men and Public Space." Standard definition: pleasant, agreeable, and friendly — a natural and genuine warmth, a voluntary expression of character. Staples\' re-definition: a mask for safety, performance as a survival strategy, a deliberate effort to appear unthreatening. Evidence from the text: the walking incident in Hyde Park, Chicago; whistling classical music to put others at ease; "smothering" internal rage to maintain outward pleasantness; and the permanent condition of being feared.', file: "https://docs.google.com/document/d/e/2PACX-1vRVQG3lcc9-3_AfhiksofSTsmcVfycURhDMXfHzGpI-GHZEbIdGgliTN23yb9d0lA/pub" },
+      { label: "Stage 2 — Rough Draft", title: "First Definition Draft", desc: "The rough draft opened with the dictionary definition of congenial, then introduced the essay's central argument: that in Staples' essay, congeniality does not imply being friendly but rather acting in a certain manner in order to appease others. The three body paragraphs covered the Hyde Park incident, the whistling section with the cowbell analogy, and the asymmetry of the performance — Staples alone doing the work of managing the atmosphere. The Works Cited entry at this stage listed only Staples' name and essay title without full MLA formatting.", file: "https://docs.google.com/document/d/e/2PACX-1vTqyWZjmgT1UCyk0lSWzuwehysHdXQklJG9K8VyUNUg59BTcJS-SRmB0OkMCtHi3g/pub" },
+      { label: "Stage 4 — Revision", title: "Revising Toward the Final Draft", desc: 'In revision, the thesis was significantly expanded and sharpened to make the survival-performance argument explicit from the first paragraph. New body paragraphs were added to cover the pattern of daily fear Staples navigates — locked car doors, people crossing streets, police encounters — as well as the moments when the performance fails (the magazine office, the jewelry store with the Doberman). The Works Cited entry was corrected to full MLA 9 format. Sentence-level editing throughout improved precision and rhythm, and the conclusion was restructured to close on the "permanent condition" framing.', file: "https://docs.google.com/document/d/e/2PACX-1vTqyWZjmgT1UCyk0lSWzuwehysHdXQklJG9K8VyUNUg59BTcJS-SRmB0OkMCtHi3g/pub" },
+      { label: "Stage 5 — Final Draft", title: "What Congenial Really Means — Submitted", desc: 'The final essay argues that in "Black Men and Public Space," congeniality does not mean being friendly — it means performing friendliness as a survival strategy in a world that reads Black male presence as an automatic threat. The essay traces this argument through five body paragraphs: the Hyde Park incident; the daily pattern of fear and avoidance Staples navigates; the whistling section and the cowbell analogy; the moments when the performance fails (magazine office, jewelry store); and the emotional cost of a performance that is entirely one-sided. The essay closes on Staples still whistling — no resolution, no final scene in which the world changes its judgment.', file: "https://docs.google.com/document/d/e/2PACX-1vQaIBa6vCziOWeF96xQbM-2TJR7zEC_Bc8BJmDhKqrMu9-yLv-kUJwAXmZse-HUOA/pub" },
+      { label: "Stage 6 — Self-Reflection", title: "Reflecting on Essay 2", desc: 'For my second essay, I chose to write a definition essay based on Brent Staples\' "Black Men and Public Space." I chose the word "congenial" because Staples uses the term while discussing his whistling practice, and its meaning in context seemed nearly opposite to its dictionary definition. After identifying the concept, I followed the format explained in class: dictionary meaning first, then a stipulated meaning as my thesis, then body paragraphs expanding on the definition. In conclusion, the recursive approach worked well — creating an initial draft and improving upon it bit by bit was easier than aiming for perfection from the beginning.', file: "https://docs.google.com/document/d/e/2PACX-1vSpEZw84IQlcWe-k4QlJiRYYkmKEPhp6W5vLyMWRmLLiT7bUTkTN2OLByadGqQWkw/pub" }
     ]
   },
   3: {
     title: "Essay 3: Research Argument Paper",
     label: "Essay 3",
-    description: "\"Institutional Protection Is a Myth\" — a research argument paper using Derrick Bell's The Space Traders and Kimberlé Crenshaw's critical race theory framework to argue that institutional protection of minority rights is always contingent on institutional self-interest.",
+    description: '"Institutional Protection Is a Myth" — a research argument paper using Derrick Bell\'s The Space Traders and Kimberlé Crenshaw\'s critical race theory framework to argue that institutional protection of minority rights is always contingent on institutional self-interest.',
     stages: [
-      {
-        label: "Stage 1 — Prewrite",
-        title: "Topic and Argument Planning",
-        desc: "Topic: The myth of institutional protection in Derrick Bell's The Space Traders. Core concepts: the Space Traders bargain; interest convergence — minority rights only advanced when white interests benefit; and institutional betrayal of marginalized people. Institutional players: government officials, the Supreme Court and the judicial system, and civil rights lawyers. Key arguments: support for marginalized communities is transactional, not moral; institutions prioritize majority interests in times of crisis; \"respectability\" does not offer true protection from systemic failure; and legal challenges are often dismissed when interest convergence disappears.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vRe4fLUH4wHKfUOuaKgvKj47Puv4HCDkbdndfwWDpFfH7OT2UNGcqsa2PqwnFHNpA/pub"
-      },
-      {
-        label: "Stage 2 — Rough Draft",
-        title: "First Research Draft",
-        desc: "The rough draft established the core argument — that institutions protect marginalized groups only when doing so serves majority interests — through three main sections: the Supreme Court's refusal to intervene in the Space Traders referendum, Professor Golightly's dismissal despite his credentials, and the convergence of government, media, church, and business around the same conclusion. A counterargument addressing democratic legitimacy was raised and rebutted. The draft used Bell's The Space Traders as the primary text, with Crenshaw's framework introduced in the final analytical paragraph.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vTPtZF5LYPsaoebj_KohyA8DMhd2F7xgHaGMLqzuhSnCkbjRg_j_X3yNa5_f6hNoA/pub"
-      },
-      {
-        label: "Stage 3 — Peer Review",
-        title: "Peer Review Received",
-        desc: "Peer review praised the essay's central argument and the use of specific evidence from Bell's text — particularly the Supreme Court's invocation of Holmes's 1903 precedent, which the reviewer called 'devastating.' Feedback highlighted the counterargument paragraph (democratic legitimacy) as a strong structural move and noted that the Golightly section effectively dismantles the 'respectability' myth. Suggested improvements included integrating Crenshaw's framework more deeply into the thesis itself, rather than having her appear only in the final analytical paragraph. The reviewer also recommended expanding the conclusion's call to action with more specific examples of independent community-building. The Works Cited was noted as properly formatted.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vRfnRI3niTBqcxF0fU4OBMXFIhKVA0WDPMhKsHtThwH9V3bkLSM0bWKVWHE_6efHA/pub"
-      },
-      {
-        label: "Stage 4 — Final Draft",
-        title: "Institutional Protection Is a Myth — Submitted",
-        desc: "The final paper argues that institutional protection of minority rights is always contingent on institutional self-interest — what Bell called interest convergence. The paper moves through five body paragraphs: the Supreme Court's refusal to intervene (traced back to a century-long pattern via Justice Oliver Wendell Holmes); a counterargument about democratic legitimacy and its rebuttal through selective historical examples (Dred Scott, Korematsu); Professor Golightly's failure despite credentials; the convergence of all institutions around the same conclusion without conspiracy; and the conditional nature of all Black progress in American history. The conclusion calls on marginalized communities to build independent sources of protection through solidarity, activism, and economic means rather than relying on institutional goodwill. Sources: Derrick Bell's \"The Space Traders\" and Kimberlé Crenshaw's \"Mapping the Margins.\"",
-        file: "https://docs.google.com/document/d/e/2PACX-1vQikCHSpEc_TMHiZQJ6-gqPMEOzgdHetHCkqN5Lm_PTFuU4K8Kj0MUOD5RexpIaIA/pub"
-      }
+      { label: "Stage 1 — Prewrite", title: "Topic and Argument Planning", desc: 'Topic: The myth of institutional protection in Derrick Bell\'s The Space Traders. Core concepts: the Space Traders bargain; interest convergence — minority rights only advanced when white interests benefit; and institutional betrayal of marginalized people. Key arguments: support for marginalized communities is transactional, not moral; institutions prioritize majority interests in times of crisis; "respectability" does not offer true protection from systemic failure; and legal challenges are often dismissed when interest convergence disappears.', file: "https://docs.google.com/document/d/e/2PACX-1vRe4fLUH4wHKfUOuaKgvKj47Puv4HCDkbdndfwWDpFfH7OT2UNGcqsa2PqwnFHNpA/pub" },
+      { label: "Stage 2 — Rough Draft", title: "First Research Draft", desc: "The rough draft established the core argument — that institutions protect marginalized groups only when doing so serves majority interests — through three main sections: the Supreme Court's refusal to intervene in the Space Traders referendum, Professor Golightly's dismissal despite his credentials, and the convergence of government, media, church, and business around the same conclusion. A counterargument addressing democratic legitimacy was raised and rebutted. The draft used Bell's The Space Traders as the primary text, with Crenshaw's framework introduced in the final analytical paragraph.", file: "https://docs.google.com/document/d/e/2PACX-1vTPtZF5LYPsaoebj_KohyA8DMhd2F7xgHaGMLqzuhSnCkbjRg_j_X3yNa5_f6hNoA/pub" },
+      { label: "Stage 3 — Peer Review", title: "Peer Review Received", desc: "Peer review praised the essay's central argument and the use of specific evidence from Bell's text — particularly the Supreme Court's invocation of Holmes's 1903 precedent, which the reviewer called 'devastating.' Feedback highlighted the counterargument paragraph (democratic legitimacy) as a strong structural move and noted that the Golightly section effectively dismantles the 'respectability' myth. Suggested improvements included integrating Crenshaw's framework more deeply into the thesis itself, rather than having her appear only in the final analytical paragraph. The reviewer also recommended expanding the conclusion's call to action with more specific examples of independent community-building. The Works Cited was noted as properly formatted.", file: "https://docs.google.com/document/d/e/2PACX-1vRfnRI3niTBqcxF0fU4OBMXFIhKVA0WDPMhKsHtThwH9V3bkLSM0bWKVWHE_6efHA/pub" },
+      { label: "Stage 4 — Final Draft", title: "Institutional Protection Is a Myth — Submitted", desc: "The final paper argues that institutional protection of minority rights is always contingent on institutional self-interest — what Bell called interest convergence. The paper moves through five body paragraphs: the Supreme Court's refusal to intervene (traced back to a century-long pattern via Justice Oliver Wendell Holmes); a counterargument about democratic legitimacy and its rebuttal through selective historical examples (Dred Scott, Korematsu); Professor Golightly's failure despite credentials; the convergence of all institutions around the same conclusion without conspiracy; and the conditional nature of all Black progress in American history. The conclusion calls on marginalized communities to build independent sources of protection through solidarity, activism, and economic means rather than relying on institutional goodwill.", file: "https://docs.google.com/document/d/e/2PACX-1vQikCHSpEc_TMHiZQJ6-gqPMEOzgdHetHCkqN5Lm_PTFuU4K8Kj0MUOD5RexpIaIA/pub" }
     ]
   },
   4: {
     title: "Reflective Essay",
     label: "Reflective Essay",
-    description: "\"Writing Across Two Worlds: A Semester of Growth and Unfinished Work\" — a portfolio reflective essay submitted May 13, 2026. A comprehensive accounting of growth achieved and skills still in progress.",
+    description: '"Writing Across Two Worlds: A Semester of Growth and Unfinished Work" — a portfolio reflective essay submitted May 13, 2026. A comprehensive accounting of growth achieved and skills still in progress.',
     stages: [
-      {
-        label: "Stage 1 — Reflective Essay",
-        title: "Writing Across Two Worlds",
-        desc: "Writing has never been a neutral act for me. Long before ENGL 101, I had already experienced what it means to lose language — to sit in a classroom in Burkina Faso, surrounded by students who understood everything, and understand almost nothing. Reviewing my two main essays — \"Lost in Translation\" and \"Institutional Protection Is a Myth\" — I can trace a clear line of growth, even as I recognize the skills I have not yet mastered. I feel most competent in writing essays that demonstrate facility with grammar and mechanics (EW) and developing unified essays that present central ideas supported by relevant personal experience, critical thought, and readings (EW). I continue to struggle with formulating a thesis appropriate to audience and purpose (CTRW) and developing my own ideas in genuine relation to the words and ideas of others from instructor-selected readings (CTRW). The portfolio I am submitting is not a record of perfection — it is a record of a writer learning, in real time, what writing at the college level actually demands. As a Business Analytics major, upper-level coursework will demand exactly the skills I still need to develop: framing an argument for a specific decision-making audience and putting outside research into meaningful conversation with my own analysis. The writing I did this semester is the foundation. The work ahead is to build on it.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vQJaKxpgpRQbsgwpwmFxvxNrUmEYHvGlnKrjC2drhC0WginFqNWPOwHqSYjPXX0fQ/pub"
-      }
+      { label: "Stage 1 — Reflective Essay", title: "Writing Across Two Worlds", desc: 'Writing has never been a neutral act for me. Long before ENGL 101, I had already experienced what it means to lose language — to sit in a classroom in Burkina Faso, surrounded by students who understood everything, and understand almost nothing. Reviewing my two main essays — "Lost in Translation" and "Institutional Protection Is a Myth" — I can trace a clear line of growth, even as I recognize the skills I have not yet mastered. The portfolio I am submitting is not a record of perfection — it is a record of a writer learning, in real time, what writing at the college level actually demands. As a Business Analytics major, upper-level coursework will demand exactly the skills I still need to develop: framing an argument for a specific decision-making audience and putting outside research into meaningful conversation with my own analysis.', file: "https://docs.google.com/document/d/e/2PACX-1vQJaKxpgpRQbsgwpwmFxvxNrUmEYHvGlnKrjC2drhC0WginFqNWPOwHqSYjPXX0fQ/pub" }
     ]
   }
 };
@@ -1020,21 +948,10 @@ const assignments = {
 function navigate(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.sidebar-item').forEach(a => a.classList.remove('active'));
-
   const target = document.getElementById('page-' + page);
-  if (target) {
-    target.classList.add('active');
-    window.scrollTo(0, 0);
-  }
-
+  if (target) { target.classList.add('active'); window.scrollTo(0, 0); }
   const navLink = document.getElementById('nav-' + page);
   if (navLink) navLink.classList.add('active');
-
-  if (page !== 'assignment-detail') {
-    document.getElementById('nav-assignments').classList.remove('active');
-    if (page === 'assignments') document.getElementById('nav-assignments').classList.add('active');
-  }
-
   window.location.hash = page;
 }
 
@@ -1042,62 +959,44 @@ function highlightNavItem(id) {
   document.querySelectorAll('.sidebar-item').forEach(a => a.classList.remove('active'));
   const item = document.getElementById(id);
   if (item) item.classList.add('active');
-  document.getElementById('nav-assignments').classList.add('active');
 }
 
 function openAssignment(id) {
   const a = assignments[id];
   if (!a) return;
-
+  const bgImg = document.getElementById('detail-bg-img');
+  if (bgImg && essayPhotos[id]) bgImg.src = essayPhotos[id];
   document.getElementById('detail-header-content').innerHTML = `
     <div>
       <p class="page-label">${a.label}</p>
       <h1 class="page-title">${a.title}</h1>
-      <p style="margin-top:1rem;font-size:0.95rem;line-height:1.7;color:var(--ink-light);max-width:600px;">${a.description}</p>
+      <p>${a.description}</p>
     </div>
-    <div style="text-align:right;">
-      <span style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">${a.stages.length} Stage${a.stages.length > 1 ? 's' : ''}</span>
+    <div style="color:rgba(212,168,74,0.55);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;align-self:flex-end;">
+      ${a.stages.length} Stage${a.stages.length > 1 ? 's' : ''}
     </div>
   `;
-
   document.getElementById('detail-stages-content').innerHTML = a.stages.map(s => `
     <div class="stage-block">
       <p class="stage-label">${s.label}</p>
       <h3 class="stage-title">${s.title}</h3>
       <p class="stage-desc">${s.desc}</p>
-      <a class="file-link" href="${s.file}" target="_blank" rel="noopener noreferrer">📄 View Your File →</a>
+      <a class="file-link" href="${s.file}" target="_blank" rel="noopener noreferrer">View Document →</a>
     </div>
   `).join('');
-
   navigate('assignment-detail');
-  document.getElementById('nav-assignments').classList.add('active');
+  highlightNavItem('nav-essay' + id);
 }
 
-function switchReflection(section) {
-  document.querySelectorAll('.reflection-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.reflection-tab').forEach(t => t.classList.remove('active'));
-
-  const target = document.getElementById('ref-' + section);
-  if (target) target.classList.add('active');
-
-  event.target.classList.add('active');
-}
-
-// Handle hash navigation on load
 window.addEventListener('load', () => {
   const hash = window.location.hash.replace('#', '');
-  if (hash && document.getElementById('page-' + hash)) {
-    navigate(hash);
-  } else {
-    navigate('home');
-  }
+  if (hash && document.getElementById('page-' + hash)) navigate(hash);
+  else navigate('home');
 });
 
 window.addEventListener('hashchange', () => {
   const hash = window.location.hash.replace('#', '');
-  if (hash && document.getElementById('page-' + hash) && hash !== 'assignment-detail') {
-    navigate(hash);
-  }
+  if (hash && document.getElementById('page-' + hash) && hash !== 'assignment-detail') navigate(hash);
 });
 </script>
 
