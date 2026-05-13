@@ -12,16 +12,16 @@
 
   :root {
     --ink: #1a1814;
-    --ink-light: #4a4540;
-    --ink-muted: #8a8278;
-    --page: #faf8f3;
-    --cream: #f2ede4;
-    --rule: #e5dfd2;
-    --accent: #b85c38;
-    --accent-soft: #f0e0d8;
-    --accent-dark: #8e4724;
-    --gold: #c9a84c;
-    --gold-light: #e6d9b8;
+    --ink-light: #3d3730;
+    --ink-muted: #7a7268;
+    --page: #f5f1ea;
+    --cream: #ede7db;
+    --rule: #d8d0c2;
+    --accent: #2c4a3e;
+    --accent-soft: #d6e4df;
+    --accent-dark: #1a2f27;
+    --gold: #8b6914;
+    --gold-light: #d4b96a;
     --sidebar-w: 280px;
   }
 
@@ -42,12 +42,12 @@
     top: 0;
     width: var(--sidebar-w);
     height: 100vh;
-    background: linear-gradient(180deg, #ffffff 0%, #faf8f3 100%);
-    border-right: 1px solid var(--rule);
+    background: linear-gradient(180deg, #1a1814 0%, #232018 100%);
+    border-right: 1px solid #3a352c;
     overflow-y: auto;
     padding: 2.5rem 1.8rem;
     z-index: 200;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
   }
 
@@ -60,23 +60,23 @@
   }
 
   .sidebar::-webkit-scrollbar-thumb {
-    background: var(--rule);
+    background: #3a352c;
     border-radius: 3px;
   }
 
   .sidebar-brand {
     font-family: 'Playfair Display', serif;
     font-size: 1.4rem;
-    color: var(--accent);
+    color: var(--gold-light);
     margin-bottom: 2.5rem;
     cursor: pointer;
     transition: color 0.3s;
     padding-bottom: 1.5rem;
-    border-bottom: 2px solid var(--gold-light);
+    border-bottom: 1px solid #3a352c;
   }
 
   .sidebar-brand:hover {
-    color: var(--accent-dark);
+    color: #e8d090;
   }
 
   .sidebar-nav {
@@ -93,7 +93,7 @@
     font-size: 0.65rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--ink-muted);
+    color: #7a7268;
     margin-bottom: 0.8rem;
     font-weight: 600;
     padding: 0.5rem 0;
@@ -103,7 +103,7 @@
     display: block;
     padding: 0.7rem 1rem;
     font-size: 0.92rem;
-    color: var(--ink-light);
+    color: #b0a898;
     text-decoration: none;
     border-radius: 6px;
     cursor: pointer;
@@ -113,16 +113,16 @@
   }
 
   .sidebar-item:hover {
-    background: var(--accent-soft);
-    color: var(--accent-dark);
+    background: rgba(44, 74, 62, 0.3);
+    color: #d4b96a;
     padding-left: 1.2rem;
   }
 
   .sidebar-item.active {
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-    color: white;
+    color: #d4b96a;
     font-weight: 500;
-    box-shadow: 0 4px 12px rgba(184, 92, 56, 0.2);
+    box-shadow: 0 4px 12px rgba(26, 47, 39, 0.4);
   }
 
   .sidebar-item.active::before {
@@ -132,25 +132,25 @@
     top: 0;
     bottom: 0;
     width: 4px;
-    background: var(--gold);
+    background: var(--gold-light);
     border-radius: 0 2px 2px 0;
   }
 
   .sidebar-item.sub {
     padding-left: 2rem;
     font-size: 0.87rem;
-    color: var(--ink-muted);
+    color: #7a7268;
     margin-bottom: 0.1rem;
   }
 
   .sidebar-item.sub:hover {
-    color: var(--accent-dark);
-    background: var(--gold-light);
+    color: #d4b96a;
+    background: rgba(44, 74, 62, 0.2);
   }
 
   .sidebar-item.sub.active {
-    background: var(--gold-light);
-    color: var(--accent-dark);
+    background: rgba(44, 74, 62, 0.3);
+    color: var(--gold-light);
   }
 
   /* ═══════ MAIN CONTENT ═══════ */
@@ -216,7 +216,7 @@
     display: inline-block;
     padding: 0.85rem 2.2rem;
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-    color: white;
+    color: #d4b96a;
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -226,12 +226,12 @@
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.3s;
-    box-shadow: 0 4px 12px rgba(184, 92, 56, 0.25);
+    box-shadow: 0 4px 12px rgba(26, 47, 39, 0.3);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(184, 92, 56, 0.35);
+    box-shadow: 0 6px 16px rgba(26, 47, 39, 0.45);
   }
 
   .btn-ghost {
@@ -256,57 +256,36 @@
   }
 
   .hero-visual {
-    background: linear-gradient(135deg, var(--cream) 0%, #eae5dc 100%);
+    background: #1a1814;
     height: 100%;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem;
+    padding: 0;
     position: relative;
     overflow: hidden;
+  }
+
+  .hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0; left: 0;
+    opacity: 0.75;
   }
 
   .hero-visual::before {
     content: '';
     position: absolute;
-    top: -20px; right: 10%;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .hero-visual::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: 5%;
-    width: 350px; height: 350px;
-    background: radial-gradient(circle, rgba(184, 92, 56, 0.06) 0%, transparent 70%);
-    border-radius: 50%;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26,24,20,0.6) 0%, transparent 60%);
+    z-index: 1;
   }
 
   .quote-block {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-  }
-
-  .quote-block .big-quote {
-    font-family: 'Playfair Display', serif;
-    font-size: 8rem;
-    line-height: 0.8;
-    color: var(--accent);
-    opacity: 0.12;
-    font-style: italic;
-    margin-bottom: -2rem;
-  }
-
-  .quote-block p {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    line-height: 1.4;
-    color: var(--ink);
-    font-weight: 400;
+    display: none;
   }
 
   /* ═══════ SECTION PAGES ═══════ */
@@ -399,7 +378,7 @@
 
   .assignment-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 32px rgba(184, 92, 56, 0.12);
+    box-shadow: 0 12px 32px rgba(44, 74, 62, 0.15);
     border-color: var(--accent);
     border-top-color: var(--accent);
   }
@@ -448,7 +427,7 @@
 
   /* ═══════ DETAIL PAGE ═══════ */
   .detail-header {
-    background: linear-gradient(135deg, #ffffff 0%, #f5f0e8 50%, #faf8f3 100%);
+    background: linear-gradient(135deg, #1a1814 0%, #2c2820 50%, #1e1c18 100%);
     padding: 4rem 4rem;
     margin-bottom: 3rem;
     border-bottom: 2px solid var(--gold-light);
@@ -463,9 +442,24 @@
     right: -10%;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(201, 168, 76, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(139, 105, 20, 0.2) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
+  }
+
+  .detail-header .page-label {
+    color: var(--gold-light);
+  }
+
+  .detail-header .page-title {
+    background: linear-gradient(135deg, #f5f1ea 0%, var(--gold-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .detail-header p[style] {
+    color: #b0a898 !important;
   }
 
   .detail-header-content {
@@ -509,7 +503,7 @@
   }
 
   .stage-block:hover {
-    box-shadow: 0 12px 32px rgba(184, 92, 56, 0.15);
+    box-shadow: 0 12px 32px rgba(44, 74, 62, 0.15);
     transform: translateY(-6px);
     border-left-color: var(--gold);
   }
@@ -658,6 +652,35 @@
     margin-bottom: 1.5rem;
   }
 
+  /* ═══════ IMAGE STRIP ═══════ */
+  .image-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    height: 220px;
+    overflow: hidden;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin: 3rem 0;
+  }
+
+  .image-strip-item {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .image-strip-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: saturate(0.8) contrast(1.05);
+  }
+
+  .image-strip-item:hover img {
+    transform: scale(1.08);
+    filter: saturate(1) contrast(1.1);
+  }
+
   /* ═══════ RESPONSIVE ═══════ */
   @media (max-width: 900px) {
     :root {
@@ -759,16 +782,21 @@
           <button class="btn-ghost" onclick="navigate('reflection')">Read Reflection</button>
         </div>
         <div class="hero-visual">
-          <div class="quote-block">
-            <div class="big-quote">"</div>
-            <p>I write to understand</p>
-          </div>
+          <img src="florian-klauer-mk7D-4UCfmg-unsplash.jpg" alt="Typewriter" />
+          <div class="quote-block"></div>
         </div>
       </div>
     </div>
 
     <!-- ASSIGNMENTS PAGE -->
     <div class="page" id="page-assignments">
+      <div class="image-strip">
+        <div class="image-strip-item"><img src="the-blowup-OAnQZ52rw64-unsplash.jpg" alt="Writing"></div>
+        <div class="image-strip-item"><img src="beku-kanomi-c4vUTnU7Q3o-unsplash.jpg" alt="Fountain pen"></div>
+        <div class="image-strip-item"><img src="nedimshoots-6CQy1skIbRs-unsplash.jpg" alt="Handwriting"></div>
+        <div class="image-strip-item"><img src="mike-tinnion-3ym6i13Y9LU-unsplash.jpg" alt="Notebook"></div>
+        <div class="image-strip-item"><img src="janko-ferlic-sfL_QOnmy00-unsplash.jpg" alt="Library"></div>
+      </div>
       <div class="section-container">
         <div class="page-header">
           <p class="page-label">Assignments</p>
@@ -781,14 +809,11 @@
             <p class="assignment-label">Essay 01</p>
             <h2 class="assignment-title">Lost in Translation</h2>
             <p class="assignment-desc">A personal narrative about navigating a new culture and language as an American student in Burkina Faso — and what it taught me about identity, resilience, and belonging.</p>
-            <p class="assignment-meta">6 Stages</p>
-          </div>
-
-          <div class="assignment-card" onclick="openAssignment(2)">
+            <p class="assignment-meta">5 Stages</p>
             <p class="assignment-label">Essay 02</p>
             <h2 class="assignment-title">What Congenial Really Means</h2>
             <p class="assignment-desc">A definition essay arguing that in Brent Staples' "Black Men and Public Space," congeniality is not friendliness — it is performing friendliness as a survival strategy.</p>
-            <p class="assignment-meta">6 Stages</p>
+            <p class="assignment-meta">5 Stages</p>
           </div>
 
           <div class="assignment-card" onclick="openAssignment(3)">
@@ -890,12 +915,6 @@ const assignments = {
         file: "https://docs.google.com/document/d/e/2PACX-1vRdRDwrbGynwzlBCqewz-lIpM_6SGimvoXMv63HDAvGkq3A3XmQ9CYc-715JjtHjQ/pub"
       },
       {
-        label: "Stage 3 — Peer Review",
-        title: "Feedback Received",
-        desc: "Peer review feedback focused on the clarity of the thesis and sentence-level flow. Reviewers noted the strength of the dialogue scenes and suggested tightening the conclusion to make the central insight about identity land more directly. Sentence-level corrections were recommended for run-on constructions in the early paragraphs.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vQaIBa6vCziOWeF96xQbM-2TJR7zEC_Bc8BJmDhKqrMu9-yLv-kUJwAXmZse-HUOA/pub"
-      },
-      {
         label: "Stage 4 — Revision",
         title: "Revising Toward the Final Draft",
         desc: "Revisions addressed sentence rhythm throughout the draft, giving individual moments more weight and clarity. The conclusion was restructured to land the central claim — that identity is not just where one comes from, but how one adapts to a new space — more decisively. Run-on sentences from the early paragraphs were separated and rebalanced. The final draft reflects all of these changes.",
@@ -930,12 +949,6 @@ const assignments = {
         label: "Stage 2 — Rough Draft",
         title: "First Definition Draft",
         desc: "The rough draft opened with the dictionary definition of congenial, then introduced the essay's central argument: that in Staples' essay, congeniality does not imply being friendly but rather acting in a certain manner in order to appease others. The three body paragraphs covered the Hyde Park incident, the whistling section with the cowbell analogy, and the asymmetry of the performance — Staples alone doing the work of managing the atmosphere. The Works Cited entry at this stage listed only Staples' name and essay title without full MLA formatting.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vTqyWZjmgT1UCyk0lSWzuwehysHdXQklJG9K8VyUNUg59BTcJS-SRmB0OkMCtHi3g/pub"
-      },
-      {
-        label: "Stage 3 — Peer Review",
-        title: "Feedback Received",
-        desc: "Peer review feedback noted the strength of the cowbell analogy as a clear illustration of Staples' redefined congeniality. Reviewers suggested expanding the body paragraphs to include more supporting scenes from the text — particularly the jewelry store and magazine office incidents — and recommended sharpening the thesis to make the survival-strategy framing more explicit from the outset. The Works Cited entry was flagged as incomplete.",
         file: "https://docs.google.com/document/d/e/2PACX-1vTqyWZjmgT1UCyk0lSWzuwehysHdXQklJG9K8VyUNUg59BTcJS-SRmB0OkMCtHi3g/pub"
       },
       {
@@ -977,9 +990,9 @@ const assignments = {
       },
       {
         label: "Stage 3 — Peer Review",
-        title: "Peer Review Pending",
-        desc: "Peer review has not yet been completed for Essay 3.",
-        file: "https://docs.google.com/document/d/e/2PACX-1vTPtZF5LYPsaoebj_KohyA8DMhd2F7xgHaGMLqzuhSnCkbjRg_j_X3yNa5_f6hNoA/pub"
+        title: "Peer Review Received",
+        desc: "Peer review praised the essay's central argument and the use of specific evidence from Bell's text — particularly the Supreme Court's invocation of Holmes's 1903 precedent, which the reviewer called 'devastating.' Feedback highlighted the counterargument paragraph (democratic legitimacy) as a strong structural move and noted that the Golightly section effectively dismantles the 'respectability' myth. Suggested improvements included integrating Crenshaw's framework more deeply into the thesis itself, rather than having her appear only in the final analytical paragraph. The reviewer also recommended expanding the conclusion's call to action with more specific examples of independent community-building. The Works Cited was noted as properly formatted.",
+        file: "https://docs.google.com/document/d/e/2PACX-1vRfnRI3niTBqcxF0fU4OBMXFIhKVA0WDPMhKsHtThwH9V3bkLSM0bWKVWHE_6efHA/pub"
       },
       {
         label: "Stage 4 — Final Draft",
