@@ -42,12 +42,13 @@
     top: 0;
     width: var(--sidebar-w);
     height: 100vh;
-    background: linear-gradient(135deg, #ffffff 0%, #faf8f3 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #faf8f3 100%);
     border-right: 1px solid var(--rule);
     overflow-y: auto;
     padding: 2.5rem 1.8rem;
     z-index: 200;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.03);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
   }
 
   .sidebar::-webkit-scrollbar {
@@ -332,10 +333,14 @@
 
   .page-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
+    font-size: 3rem;
     color: var(--ink);
     margin-bottom: 1rem;
     font-weight: 700;
+    background: linear-gradient(135deg, var(--ink) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .page-subtitle {
@@ -354,15 +359,28 @@
   }
 
   .assignment-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #ffffff 0%, #faf9f5 100%);
+    padding: 2.5rem;
+    border-radius: 12px;
     border: 1px solid var(--rule);
+    border-top: 2px solid var(--gold-light);
     cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     position: relative;
     overflow: hidden;
+  }
+
+  .assignment-card::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    right: -20%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    transition: all 0.3s ease;
   }
 
   .assignment-card::before {
@@ -371,21 +389,28 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 3px;
     background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s;
+    z-index: 1;
   }
 
   .assignment-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(184, 92, 56, 0.12);
     border-color: var(--accent);
+    border-top-color: var(--accent);
   }
 
   .assignment-card:hover::before {
     transform: scaleX(1);
+  }
+
+  .assignment-card:hover::after {
+    bottom: -30%;
+    right: -10%;
   }
 
   .assignment-label {
@@ -423,10 +448,24 @@
 
   /* ═══════ DETAIL PAGE ═══════ */
   .detail-header {
-    background: linear-gradient(135deg, #ffffff 0%, #faf8f3 100%);
-    padding: 3rem 4rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f0e8 50%, #faf8f3 100%);
+    padding: 4rem 4rem;
     margin-bottom: 3rem;
     border-bottom: 2px solid var(--gold-light);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .detail-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
   }
 
   .detail-header-content {
@@ -445,17 +484,34 @@
   }
 
   .stage-block {
-    background: white;
-    padding: 2.2rem;
-    border-radius: 8px;
-    border-left: 4px solid var(--gold);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s;
+    background: linear-gradient(135deg, #ffffff 0%, #faf9f5 100%);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border-left: 5px solid var(--accent);
+    border-top: 1px solid var(--gold-light);
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    box-shadow: 0 4px 16px rgba(184, 92, 56, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stage-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
   }
 
   .stage-block:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    transform: translateX(4px);
+    box-shadow: 0 12px 32px rgba(184, 92, 56, 0.15);
+    transform: translateY(-6px);
+    border-left-color: var(--gold);
   }
 
   .stage-label {
@@ -469,10 +525,23 @@
 
   .stage-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: var(--ink);
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     font-weight: 700;
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .stage-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3rem;
+    width: 4px;
+    height: 1.2rem;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--gold) 100%);
+    border-radius: 2px;
   }
 
   .stage-desc {
@@ -496,6 +565,35 @@
   .file-link:hover {
     color: var(--accent-dark);
     border-bottom-color: var(--accent);
+  }
+
+  /* ═══════ ESSAY CONTENT ═══════ */
+  .essay-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 8px;
+    line-height: 1.9;
+    font-size: 1rem;
+  }
+
+  .essay-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--gold-light);
+  }
+
+  .essay-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .essay-content p {
+    margin-bottom: 1.3rem;
+    color: var(--ink-light);
+    text-align: justify;
   }
 
   /* ═══════ REFLECTION ═══════ */
@@ -630,20 +728,18 @@
       <a class="sidebar-item" id="nav-home" onclick="navigate('home')">Home</a>
     </div>
 
-    <!-- Section 2: Assignments -->
+    <!-- Section 2: Essays -->
     <div class="sidebar-section">
-      <div class="sidebar-section-title">Assignments</div>
-      <a class="sidebar-item" id="nav-assignments" onclick="navigate('assignments')">All Assignments</a>
-      <a class="sidebar-item sub" onclick="openAssignment(1); highlightNavItem('nav-a1')">01 — Personal Narrative</a>
-      <a class="sidebar-item sub" onclick="openAssignment(2); highlightNavItem('nav-a2')">02 — Rhetorical Analysis</a>
-      <a class="sidebar-item sub" onclick="openAssignment(3); highlightNavItem('nav-a3')">03 — Research Paper</a>
-      <a class="sidebar-item sub" onclick="openAssignment(4); highlightNavItem('nav-a4')">04 — Self Reflection</a>
+      <div class="sidebar-section-title">Essays</div>
+      <a class="sidebar-item" id="nav-essay1" onclick="openAssignment(1); highlightNavItem('nav-essay1')">Essay 1</a>
+      <a class="sidebar-item" id="nav-essay2" onclick="openAssignment(2); highlightNavItem('nav-essay2')">Essay 2</a>
+      <a class="sidebar-item" id="nav-essay3" onclick="openAssignment(3); highlightNavItem('nav-essay3')">Essay 3</a>
     </div>
 
     <!-- Section 3: Reflection -->
     <div class="sidebar-section">
       <div class="sidebar-section-title">Reflection</div>
-      <a class="sidebar-item" id="nav-reflection" onclick="navigate('reflection')">Portfolio Reflection</a>
+      <a class="sidebar-item" id="nav-reflection" onclick="navigate('reflection')">Self-Reflection</a>
     </div>
   </nav>
 </aside>
@@ -729,54 +825,36 @@
 
     <!-- REFLECTION PAGE -->
     <div class="page" id="page-reflection">
-      <div class="section-container">
-        <div class="page-header">
-          <p class="page-label">Reflection</p>
-          <h1 class="page-title">Portfolio Reflection</h1>
-          <p class="page-subtitle">What I've learned this semester about writing, revision, and myself as a writer.</p>
+      <div class="detail-header">
+        <div class="detail-header-content">
+          <div>
+            <p class="page-label">Final Essay</p>
+            <h1 class="page-title">Self-Reflection Essay</h1>
+            <p style="margin-top:1rem;font-size:0.95rem;line-height:1.7;color:var(--ink-light);max-width:600px;">A comprehensive essay reflecting on my growth throughout the semester, how my writing has evolved, and the key insights I've gained from the entire writing process.</p>
+          </div>
         </div>
       </div>
 
-      <div class="reflection-container">
-        <div class="reflection-nav">
-          <button class="reflection-tab active" onclick="switchReflection('learning')">Key Learnings</button>
-          <button class="reflection-tab" onclick="switchReflection('growth')">Growth Areas</button>
-          <button class="reflection-tab" onclick="switchReflection('forward')">Going Forward</button>
-        </div>
-
-        <div class="reflection-section active" id="ref-learning">
-          <h2>What I Learned This Semester</h2>
+      <div class="section-container">
+        <div class="essay-content">
+          <h2>Self-Reflection Essay</h2>
           <p>
-            [Replace this with your own text.] The biggest thing I learned is that revision is not punishment — it's an opportunity to think more deeply about what I was trying to say. My first drafts are almost always unclear because I'm still figuring out my own position as I write. By the third or fourth draft, I've usually found the thing that actually matters.
+            [Write your self-reflection essay here. This is a complete essay that should discuss your overall writing journey this semester. Include sections on your growth, key areas of improvement, challenges you overcame, and what you learned about yourself as a writer.]
           </p>
           <p>
-            I also learned that I am more patient than I gave myself credit for. The research paper required staying with a topic for weeks without being sure where I was going. I expected to hate that uncertainty. Instead, I found that it is where the most interesting thinking happens.
+            [Continue developing your essay with specific examples from your three essays. Show how different assignments taught you different lessons and how those lessons connected to each other.]
           </p>
           <p>
-            Most importantly, I learned that I write to understand — not to report. When I finished an assignment and felt satisfied, it was always because I had figured something out that I didn't know when I started. That is the kind of writer I want to keep being.
-          </p>
-        </div>
-
-        <div class="reflection-section" id="ref-growth">
-          <h2>What I Need to Work On</h2>
-          <p>
-            [Replace this with your own text.] The biggest thing I learned is that revision is not punishment — it's an opportunity to think more deeply about what I was trying to say. My first drafts are almost always unclear because I'm still figuring out my own position as I write. By the third or fourth draft, I've usually found the thing that actually matters.
+            [Discuss specific areas of growth. This might include clarity, argumentation, use of evidence, structure, voice, or any other aspect of writing. Give concrete examples from your essays.]
           </p>
           <p>
-            I also learned that I am more patient than I gave myself credit for. The research paper required staying with a topic for weeks without being sure where I was going. I expected to hate that uncertainty. Instead, I found that it is where the most interesting thinking happens.
+            [Reflect on what made these improvements possible — was it peer feedback, revision practice, instructor comments, or your own persistence? What were the turning points?]
           </p>
           <p>
-            Most importantly, I learned that I write to understand — not to report. When I finished an assignment and felt satisfied, it was always because I had figured something out that I didn't know when I started. That is the kind of writer I want to keep being.
-          </p>
-        </div>
-
-        <div class="reflection-section" id="ref-forward">
-          <h2>Going Forward</h2>
-          <p>
-            [Replace this with your own text.] I leave this semester with a clearer sense of what I need to work on: directness, mostly. I need to trust the reader more and trust myself more. The writing I'm proudest of in this portfolio is the writing where I stopped hedging and just said the thing. I want to do more of that.
+            [Describe what you want to continue working on as a writer. What skills do you want to develop further? What did you learn about yourself as a writer that will help you in future writing?]
           </p>
           <p>
-            This portfolio is not a finished product. It is evidence of a process. I hope whoever reads it can see the thinking in the drafts as clearly as in the finals.
+            [Conclude with a final thought about what this portfolio represents — not just the finished essays, but the process, the thinking, and the growth behind them. What kind of writer do you want to become?]
           </p>
         </div>
       </div>
@@ -788,8 +866,8 @@
 <script>
 const assignments = {
   1: {
-    title: "Personal Narrative Essay",
-    label: "Essay 01",
+    title: "Essay 1: Personal Narrative",
+    label: "SA1",
     description: "A personal narrative examining identity through lived experience. Three drafts, each revealing a deeper layer of what the story was actually about.",
     stages: [
       {
@@ -815,12 +893,18 @@ const assignments = {
         title: "Revised and Submitted",
         desc: "The final draft is approximately [X] words and focuses tightly on [the core moment or theme]. The biggest revision from draft two was cutting the final two paragraphs entirely and ending on an image rather than an explanation. This was the hardest revision to make and, I think, the most important one.",
         file: "#"
+      },
+      {
+        label: "Stage 5 — Self-Reflection",
+        title: "Reflecting on This Essay",
+        desc: "[Add your self-reflection for Essay 1 here. What did you learn from this assignment? What surprised you about the writing process? How did revision change your understanding of the story or yourself?]",
+        file: "#"
       }
     ]
   },
   2: {
-    title: "Rhetorical Analysis",
-    label: "Essay 02",
+    title: "Essay 2: Rhetorical Analysis",
+    label: "SA2",
     description: "An analysis of a persuasive text — examining how the author's choices of ethos, pathos, and logos work together to construct an argument.",
     stages: [
       {
@@ -840,12 +924,18 @@ const assignments = {
         title: "Revised and Submitted",
         desc: "The final draft reorganizes the analysis around three claims about the text's rhetorical strategy rather than around a chronological summary. Each body paragraph now follows the structure: identify the technique, provide evidence, explain the effect on a specific audience. This structure was cleaner and more persuasive than the original.",
         file: "#"
+      },
+      {
+        label: "Stage 4 — Self-Reflection",
+        title: "Reflecting on This Essay",
+        desc: "[Add your self-reflection for Essay 2 here. What did you learn about analyzing rhetoric? How did studying persuasive techniques change the way you read or write? What was the most challenging part of this analysis?]",
+        file: "#"
       }
     ]
   },
   3: {
-    title: "Research Argument Paper",
-    label: "Essay 03",
+    title: "Essay 3: Research Argument Paper",
+    label: "SA3",
     description: "A full research paper arguing a position on [your topic]. Five stages from proposal through final revision — the most complex writing process of the semester.",
     stages: [
       {
@@ -881,7 +971,7 @@ const assignments = {
     ]
   },
   4: {
-    title: "Reflective Cover Letter",
+    title: "Self Reflection",
     label: " Self Reflection",
     description: "A cover letter for this portfolio, addressed to a future reader. Written at the semester's end as a synthesis of growth and learning.",
     stages: [
